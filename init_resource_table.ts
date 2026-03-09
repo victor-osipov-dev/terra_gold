@@ -11,9 +11,10 @@ const prisma = new PrismaClient({
 
 await prisma.resource.createMany({
     data: [
-        { name: "Почва", number: process.env.INIT_RESOURCE_ANIMALS ?? 0 },
-        { name: "Животные", number: process.env.INIT_RESOURCE_PLANTS ?? 0 },
+        { name: "Растения", number: process.env.INIT_RESOURCE_PLANTS ?? 0 },
+        { name: "Животные", number: process.env.INIT_RESOURCE_ANIMALS ?? 0 },
         { name: "Фабрики", number: process.env.INIT_RESOURCE_FACTORIES ?? 0 },
+        { name: "Шахты", number: process.env.INIT_RESOURCE_MINES ?? 0 },
     ],
 });
 

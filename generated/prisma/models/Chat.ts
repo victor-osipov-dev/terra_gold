@@ -28,27 +28,47 @@ export type AggregateChat = {
 
 export type ChatAvgAggregateOutputType = {
   id: number | null
+  budget: runtime.Decimal | null
+  food: number | null
+  materials: number | null
+  level_workers: number | null
 }
 
 export type ChatSumAggregateOutputType = {
   id: bigint | null
+  budget: runtime.Decimal | null
+  food: number | null
+  materials: number | null
+  level_workers: number | null
 }
 
 export type ChatMinAggregateOutputType = {
   id: bigint | null
   title: string | null
+  budget: runtime.Decimal | null
+  food: number | null
+  materials: number | null
+  level_workers: number | null
   created_at: Date | null
 }
 
 export type ChatMaxAggregateOutputType = {
   id: bigint | null
   title: string | null
+  budget: runtime.Decimal | null
+  food: number | null
+  materials: number | null
+  level_workers: number | null
   created_at: Date | null
 }
 
 export type ChatCountAggregateOutputType = {
   id: number
   title: number
+  budget: number
+  food: number
+  materials: number
+  level_workers: number
   created_at: number
   _all: number
 }
@@ -56,27 +76,47 @@ export type ChatCountAggregateOutputType = {
 
 export type ChatAvgAggregateInputType = {
   id?: true
+  budget?: true
+  food?: true
+  materials?: true
+  level_workers?: true
 }
 
 export type ChatSumAggregateInputType = {
   id?: true
+  budget?: true
+  food?: true
+  materials?: true
+  level_workers?: true
 }
 
 export type ChatMinAggregateInputType = {
   id?: true
   title?: true
+  budget?: true
+  food?: true
+  materials?: true
+  level_workers?: true
   created_at?: true
 }
 
 export type ChatMaxAggregateInputType = {
   id?: true
   title?: true
+  budget?: true
+  food?: true
+  materials?: true
+  level_workers?: true
   created_at?: true
 }
 
 export type ChatCountAggregateInputType = {
   id?: true
   title?: true
+  budget?: true
+  food?: true
+  materials?: true
+  level_workers?: true
   created_at?: true
   _all?: true
 }
@@ -170,6 +210,10 @@ export type ChatGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ChatGroupByOutputType = {
   id: bigint
   title: string
+  budget: runtime.Decimal
+  food: number
+  materials: number
+  level_workers: number
   created_at: Date
   _count: ChatCountAggregateOutputType | null
   _avg: ChatAvgAggregateOutputType | null
@@ -199,6 +243,10 @@ export type ChatWhereInput = {
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   id?: Prisma.BigIntFilter<"Chat"> | bigint | number
   title?: Prisma.StringFilter<"Chat"> | string
+  budget?: Prisma.DecimalFilter<"Chat"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFilter<"Chat"> | number
+  materials?: Prisma.IntFilter<"Chat"> | number
+  level_workers?: Prisma.IntFilter<"Chat"> | number
   created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
   user_chats?: Prisma.UserChatListRelationFilter
 }
@@ -206,6 +254,10 @@ export type ChatWhereInput = {
 export type ChatOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   user_chats?: Prisma.UserChatOrderByRelationAggregateInput
 }
@@ -216,6 +268,10 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ChatWhereInput[]
   NOT?: Prisma.ChatWhereInput | Prisma.ChatWhereInput[]
   title?: Prisma.StringFilter<"Chat"> | string
+  budget?: Prisma.DecimalFilter<"Chat"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFilter<"Chat"> | number
+  materials?: Prisma.IntFilter<"Chat"> | number
+  level_workers?: Prisma.IntFilter<"Chat"> | number
   created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
   user_chats?: Prisma.UserChatListRelationFilter
 }, "id">
@@ -223,6 +279,10 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
 export type ChatOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.ChatCountOrderByAggregateInput
   _avg?: Prisma.ChatAvgOrderByAggregateInput
@@ -237,12 +297,20 @@ export type ChatScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ChatScalarWhereWithAggregatesInput | Prisma.ChatScalarWhereWithAggregatesInput[]
   id?: Prisma.BigIntWithAggregatesFilter<"Chat"> | bigint | number
   title?: Prisma.StringWithAggregatesFilter<"Chat"> | string
+  budget?: Prisma.DecimalWithAggregatesFilter<"Chat"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntWithAggregatesFilter<"Chat"> | number
+  materials?: Prisma.IntWithAggregatesFilter<"Chat"> | number
+  level_workers?: Prisma.IntWithAggregatesFilter<"Chat"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Chat"> | Date | string
 }
 
 export type ChatCreateInput = {
   id?: bigint | number
   title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
   created_at?: Date | string
   user_chats?: Prisma.UserChatCreateNestedManyWithoutChatInput
 }
@@ -250,6 +318,10 @@ export type ChatCreateInput = {
 export type ChatUncheckedCreateInput = {
   id?: bigint | number
   title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
   created_at?: Date | string
   user_chats?: Prisma.UserChatUncheckedCreateNestedManyWithoutChatInput
 }
@@ -257,6 +329,10 @@ export type ChatUncheckedCreateInput = {
 export type ChatUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user_chats?: Prisma.UserChatUpdateManyWithoutChatNestedInput
 }
@@ -264,6 +340,10 @@ export type ChatUpdateInput = {
 export type ChatUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user_chats?: Prisma.UserChatUncheckedUpdateManyWithoutChatNestedInput
 }
@@ -271,50 +351,98 @@ export type ChatUncheckedUpdateInput = {
 export type ChatCreateManyInput = {
   id?: bigint | number
   title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
   created_at?: Date | string
 }
 
 export type ChatUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChatUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChatCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type ChatAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
 }
 
 export type ChatMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type ChatMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
 export type ChatSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  budget?: Prisma.SortOrder
+  food?: Prisma.SortOrder
+  materials?: Prisma.SortOrder
+  level_workers?: Prisma.SortOrder
 }
 
 export type ChatScalarRelationFilter = {
   is?: Prisma.ChatWhereInput
   isNot?: Prisma.ChatWhereInput
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type ChatCreateNestedOneWithoutUser_chatsInput = {
@@ -334,12 +462,20 @@ export type ChatUpdateOneRequiredWithoutUser_chatsNestedInput = {
 export type ChatCreateWithoutUser_chatsInput = {
   id?: bigint | number
   title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
   created_at?: Date | string
 }
 
 export type ChatUncheckedCreateWithoutUser_chatsInput = {
   id?: bigint | number
   title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
   created_at?: Date | string
 }
 
@@ -362,12 +498,20 @@ export type ChatUpdateToOneWithWhereWithoutUser_chatsInput = {
 export type ChatUpdateWithoutUser_chatsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ChatUncheckedUpdateWithoutUser_chatsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -405,6 +549,10 @@ export type ChatCountOutputTypeCountUser_chatsArgs<ExtArgs extends runtime.Types
 export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  budget?: boolean
+  food?: boolean
+  materials?: boolean
+  level_workers?: boolean
   created_at?: boolean
   user_chats?: boolean | Prisma.Chat$user_chatsArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
@@ -413,22 +561,34 @@ export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ChatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  budget?: boolean
+  food?: boolean
+  materials?: boolean
+  level_workers?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  budget?: boolean
+  food?: boolean
+  materials?: boolean
+  level_workers?: boolean
   created_at?: boolean
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectScalar = {
   id?: boolean
   title?: boolean
+  budget?: boolean
+  food?: boolean
+  materials?: boolean
+  level_workers?: boolean
   created_at?: boolean
 }
 
-export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "created_at", ExtArgs["result"]["chat"]>
+export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "budget" | "food" | "materials" | "level_workers" | "created_at", ExtArgs["result"]["chat"]>
 export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user_chats?: boolean | Prisma.Chat$user_chatsArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
@@ -444,6 +604,10 @@ export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
     title: string
+    budget: runtime.Decimal
+    food: number
+    materials: number
+    level_workers: number
     created_at: Date
   }, ExtArgs["result"]["chat"]>
   composites: {}
@@ -871,6 +1035,10 @@ export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface ChatFieldRefs {
   readonly id: Prisma.FieldRef<"Chat", 'BigInt'>
   readonly title: Prisma.FieldRef<"Chat", 'String'>
+  readonly budget: Prisma.FieldRef<"Chat", 'Decimal'>
+  readonly food: Prisma.FieldRef<"Chat", 'Int'>
+  readonly materials: Prisma.FieldRef<"Chat", 'Int'>
+  readonly level_workers: Prisma.FieldRef<"Chat", 'Int'>
   readonly created_at: Prisma.FieldRef<"Chat", 'DateTime'>
 }
     

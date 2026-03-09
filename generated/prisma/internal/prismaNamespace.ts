@@ -756,6 +756,10 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const ChatScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  budget: 'budget',
+  food: 'food',
+  materials: 'materials',
+  level_workers: 'level_workers',
   created_at: 'created_at'
 } as const
 

@@ -1,8 +1,7 @@
 import "dotenv/config";
 import cron from "node-cron";
 import { bot, prisma } from "./api";
-import './commands/stats'
-import './commands/resources_for_mining'
+import './commands'
 
 
 // слушаем ВСЕ типы сообщений

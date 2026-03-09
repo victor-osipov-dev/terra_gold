@@ -471,14 +471,6 @@ export type UserChatUncheckedUpdateManyWithoutChatNestedInput = {
   deleteMany?: Prisma.UserChatScalarWhereInput | Prisma.UserChatScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type UserChatCreateWithoutUserInput = {
   total_messages: number
   messages_per_hour: number
