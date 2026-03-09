@@ -25,6 +25,13 @@ model Chat {
   user_chats  UserChat[]  // связь с промежуточной таблицей
 }
 
+model Resource {
+  id         BigInt      @id @default(autoincrement())
+  name      String
+  number      Decimal  @db.Decimal(10, 2)
+  created_at DateTime    @default(now())
+}
+
 // Промежуточная таблица для связи многие ко многим с данными
 model UserChat {
   user_id    BigInt

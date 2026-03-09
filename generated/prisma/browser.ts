@@ -28,6 +28,11 @@ export type User = Prisma.UserModel
  */
 export type Chat = Prisma.ChatModel
 /**
+ * Model Resource
+ * 
+ */
+export type Resource = Prisma.ResourceModel
+/**
  * Model UserChat
  * 
  */
