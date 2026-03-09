@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         BigInt      @id @default(autoincrement())
+  first_name String
+  last_name  String
+  username   String      @unique
+  created_at DateTime    @default(now())
+
+  userChats  UserChat[]  // связь с промежуточной таблицей
+}
+
+model Chat {
+  id         BigInt      @id @default(autoincrement())
+  title      String
+  created_at DateTime    @default(now())
+
+  user_chats  UserChat[]  // связь с промежуточной таблицей
+}
+
+// Промежуточная таблица для связи многие ко многим с данными
+model UserChat {
+  user_id    BigInt
+  chat_id    BigInt
+  total_messages    Int
+  messages_per_hour Int
+  joined_at DateTime     @default(now())
+
+  user      User @relation(fields: [user_id], references: [id])
+  chat      Chat @relation(fields: [chat_id], references: [id])
+
+  @@id([user_id, chat_id]) // составной первичный ключ
+}
