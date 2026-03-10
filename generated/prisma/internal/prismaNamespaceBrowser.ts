@@ -91,6 +91,7 @@ export const ChatScalarFieldEnum = {
   food: 'food',
   materials: 'materials',
   level_workers: 'level_workers',
+  resource_id: 'resource_id',
   created_at: 'created_at'
 } as const
 

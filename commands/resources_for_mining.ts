@@ -11,7 +11,7 @@ bot.command("resources_for_mining", async (ctx) => {
     const body = resources
         .map(
             (resource) =>
-                `${resource.name}: ${resource.number} ₽`,
+                `${resource.name}: $${resource.number}`,
         )
         .join("\n");
 

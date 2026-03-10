@@ -8,11 +8,11 @@ bot.command("government", async (ctx) => {
     let response = `🏰Об этом государстве.\n\n`;
 
     const currentChat = await prisma.chat.findFirst({
-        where: { id: chat.id * -1 },
+        where: { id: chat.id },
     });
     
     response +=
-        `Заработано: ${currentChat?.budget} ₽\n` +
+        `Заработано: $${currentChat?.budget}\n` +
         `Еда: ${currentChat?.food} ед.\n` +
         `Материалы: ${currentChat?.materials} ед.\n` +
         `Уровень работников: ${currentChat?.level_workers}`;

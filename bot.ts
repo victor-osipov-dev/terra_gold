@@ -1,8 +1,8 @@
 import "dotenv/config";
 import cron from "node-cron";
 import { bot, prisma } from "./api";
-import './commands'
-
+import "./commands";
+import { Decimal } from "@prisma/client/runtime/client";
 
 // слушаем ВСЕ типы сообщений
 bot.on("message", async (ctx) => {
@@ -11,23 +11,24 @@ bot.on("message", async (ctx) => {
     const chat = msg.chat;
 
     const new_user = await prisma.user.upsert({
-        where: { id: user.id }, // уникальное поле для поиска
-        update: {}, // если пользователь найден — ничего не делаем
+        where: { id: user.id },
+        update: {},
         create: {
             id: user.id,
             first_name: user.first_name,
             last_name: user.last_name ?? "",
             username: user.username ?? "",
-        }, // если нет — создаём нового
+        },
     });
 
     const new_chat = await prisma.chat.upsert({
-        where: { id: chat.id * -1 }, // уникальное поле для поиска
-        update: {}, // если пользователь найден — ничего не делаем
+        where: { id: chat.id },
+        update: {},
         create: {
-            id: chat.id * -1,
+            id: chat.id,
             title: "title" in chat ? chat.title : "Chat",
-        }, // если нет — создаём нового
+        },
+        include: { resource: true },
     });
 
     let user_chat = await prisma.userChat.findFirst({
@@ -55,6 +56,82 @@ bot.on("message", async (ctx) => {
         });
     }
 
+    if (user_chat.messages_per_hour <= 3) {
+        await prisma.$transaction(async (tx) => {
+            let income = new Decimal(0.001 * new_chat.level_workers);
+
+            const result = await tx.resource.updateMany({
+                where: {
+                    id: new_chat.resource_id,
+                    number: { gte: income },
+                },
+                data: {
+                    number: { decrement: income },
+                },
+            });
+
+            if (result.count === 0) {
+                const resource = await tx.resource.findUnique({
+                    where: { id: new_chat.resource_id },
+                });
+
+                if (!resource || resource.number.eq(0)) {
+                    return;
+                }
+
+                income = resource.number;
+
+                await tx.resource.update({
+                    where: { id: new_chat.resource_id },
+                    data: {
+                        number: { decrement: income },
+                    },
+                });
+            }
+
+            await tx.chat.update({
+                where: { id: new_chat.id },
+                data: {
+                    budget: { increment: income },
+                },
+            });
+        });
+
+        if (
+            new_chat.resource.name == "Растения" ||
+            new_chat.resource.name == "Животные"
+        ) {
+            await prisma.chat.update({
+                where: { id: new_chat.id },
+                data: {
+                    food: {
+                        increment: 1,
+                    },
+                },
+            });
+        } else if (
+            new_chat.resource.name == "Фабрики" ||
+            new_chat.resource.name == "Шахты"
+        ) {
+            await prisma.chat.update({
+                where: { id: new_chat.id },
+                data: {
+                    materials: {
+                        increment: 2,
+                    },
+                },
+            });
+            await prisma.chat.update({
+                where: { id: new_chat.id },
+                data: {
+                    food: {
+                        decrement: 1,
+                    },
+                },
+            });
+        }
+    }
+
     // ctx.sendMessage("Принято");
 });
 
@@ -69,7 +146,7 @@ async function resetStatisticsForHour() {
 cron.schedule("0 * * * *", async () => {
     try {
         console.log("Запуск часовой статистики...");
-        await resetStatisticsForHour()
+        await resetStatisticsForHour();
         console.log("resetStatisticsForHour выполнена");
     } catch (error) {
         console.error("Ошибка при выполнении cron-задачи:", error);

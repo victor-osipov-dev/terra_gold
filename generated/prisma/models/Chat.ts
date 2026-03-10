@@ -32,6 +32,7 @@ export type ChatAvgAggregateOutputType = {
   food: number | null
   materials: number | null
   level_workers: number | null
+  resource_id: number | null
 }
 
 export type ChatSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type ChatSumAggregateOutputType = {
   food: number | null
   materials: number | null
   level_workers: number | null
+  resource_id: bigint | null
 }
 
 export type ChatMinAggregateOutputType = {
@@ -49,6 +51,7 @@ export type ChatMinAggregateOutputType = {
   food: number | null
   materials: number | null
   level_workers: number | null
+  resource_id: bigint | null
   created_at: Date | null
 }
 
@@ -59,6 +62,7 @@ export type ChatMaxAggregateOutputType = {
   food: number | null
   materials: number | null
   level_workers: number | null
+  resource_id: bigint | null
   created_at: Date | null
 }
 
@@ -69,6 +73,7 @@ export type ChatCountAggregateOutputType = {
   food: number
   materials: number
   level_workers: number
+  resource_id: number
   created_at: number
   _all: number
 }
@@ -80,6 +85,7 @@ export type ChatAvgAggregateInputType = {
   food?: true
   materials?: true
   level_workers?: true
+  resource_id?: true
 }
 
 export type ChatSumAggregateInputType = {
@@ -88,6 +94,7 @@ export type ChatSumAggregateInputType = {
   food?: true
   materials?: true
   level_workers?: true
+  resource_id?: true
 }
 
 export type ChatMinAggregateInputType = {
@@ -97,6 +104,7 @@ export type ChatMinAggregateInputType = {
   food?: true
   materials?: true
   level_workers?: true
+  resource_id?: true
   created_at?: true
 }
 
@@ -107,6 +115,7 @@ export type ChatMaxAggregateInputType = {
   food?: true
   materials?: true
   level_workers?: true
+  resource_id?: true
   created_at?: true
 }
 
@@ -117,6 +126,7 @@ export type ChatCountAggregateInputType = {
   food?: true
   materials?: true
   level_workers?: true
+  resource_id?: true
   created_at?: true
   _all?: true
 }
@@ -214,6 +224,7 @@ export type ChatGroupByOutputType = {
   food: number
   materials: number
   level_workers: number
+  resource_id: bigint
   created_at: Date
   _count: ChatCountAggregateOutputType | null
   _avg: ChatAvgAggregateOutputType | null
@@ -247,7 +258,9 @@ export type ChatWhereInput = {
   food?: Prisma.IntFilter<"Chat"> | number
   materials?: Prisma.IntFilter<"Chat"> | number
   level_workers?: Prisma.IntFilter<"Chat"> | number
+  resource_id?: Prisma.BigIntFilter<"Chat"> | bigint | number
   created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
+  resource?: Prisma.XOR<Prisma.ResourceScalarRelationFilter, Prisma.ResourceWhereInput>
   user_chats?: Prisma.UserChatListRelationFilter
 }
 
@@ -258,7 +271,9 @@ export type ChatOrderByWithRelationInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  resource?: Prisma.ResourceOrderByWithRelationInput
   user_chats?: Prisma.UserChatOrderByRelationAggregateInput
 }
 
@@ -272,7 +287,9 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   food?: Prisma.IntFilter<"Chat"> | number
   materials?: Prisma.IntFilter<"Chat"> | number
   level_workers?: Prisma.IntFilter<"Chat"> | number
+  resource_id?: Prisma.BigIntFilter<"Chat"> | bigint | number
   created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
+  resource?: Prisma.XOR<Prisma.ResourceScalarRelationFilter, Prisma.ResourceWhereInput>
   user_chats?: Prisma.UserChatListRelationFilter
 }, "id">
 
@@ -283,6 +300,7 @@ export type ChatOrderByWithAggregationInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   _count?: Prisma.ChatCountOrderByAggregateInput
   _avg?: Prisma.ChatAvgOrderByAggregateInput
@@ -301,6 +319,7 @@ export type ChatScalarWhereWithAggregatesInput = {
   food?: Prisma.IntWithAggregatesFilter<"Chat"> | number
   materials?: Prisma.IntWithAggregatesFilter<"Chat"> | number
   level_workers?: Prisma.IntWithAggregatesFilter<"Chat"> | number
+  resource_id?: Prisma.BigIntWithAggregatesFilter<"Chat"> | bigint | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Chat"> | Date | string
 }
 
@@ -312,6 +331,7 @@ export type ChatCreateInput = {
   materials?: number
   level_workers?: number
   created_at?: Date | string
+  resource?: Prisma.ResourceCreateNestedOneWithoutChatsInput
   user_chats?: Prisma.UserChatCreateNestedManyWithoutChatInput
 }
 
@@ -322,6 +342,7 @@ export type ChatUncheckedCreateInput = {
   food?: number
   materials?: number
   level_workers?: number
+  resource_id?: bigint | number
   created_at?: Date | string
   user_chats?: Prisma.UserChatUncheckedCreateNestedManyWithoutChatInput
 }
@@ -334,6 +355,7 @@ export type ChatUpdateInput = {
   materials?: Prisma.IntFieldUpdateOperationsInput | number
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resource?: Prisma.ResourceUpdateOneRequiredWithoutChatsNestedInput
   user_chats?: Prisma.UserChatUpdateManyWithoutChatNestedInput
 }
 
@@ -344,6 +366,7 @@ export type ChatUncheckedUpdateInput = {
   food?: Prisma.IntFieldUpdateOperationsInput | number
   materials?: Prisma.IntFieldUpdateOperationsInput | number
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  resource_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user_chats?: Prisma.UserChatUncheckedUpdateManyWithoutChatNestedInput
 }
@@ -355,6 +378,7 @@ export type ChatCreateManyInput = {
   food?: number
   materials?: number
   level_workers?: number
+  resource_id?: bigint | number
   created_at?: Date | string
 }
 
@@ -375,6 +399,7 @@ export type ChatUncheckedUpdateManyInput = {
   food?: Prisma.IntFieldUpdateOperationsInput | number
   materials?: Prisma.IntFieldUpdateOperationsInput | number
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  resource_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -385,6 +410,7 @@ export type ChatCountOrderByAggregateInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -394,6 +420,7 @@ export type ChatAvgOrderByAggregateInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
 }
 
 export type ChatMaxOrderByAggregateInput = {
@@ -403,6 +430,7 @@ export type ChatMaxOrderByAggregateInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -413,6 +441,7 @@ export type ChatMinOrderByAggregateInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
 }
 
@@ -422,6 +451,17 @@ export type ChatSumOrderByAggregateInput = {
   food?: Prisma.SortOrder
   materials?: Prisma.SortOrder
   level_workers?: Prisma.SortOrder
+  resource_id?: Prisma.SortOrder
+}
+
+export type ChatListRelationFilter = {
+  every?: Prisma.ChatWhereInput
+  some?: Prisma.ChatWhereInput
+  none?: Prisma.ChatWhereInput
+}
+
+export type ChatOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ChatScalarRelationFilter = {
@@ -445,6 +485,48 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type ChatCreateNestedManyWithoutResourceInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutResourceInput, Prisma.ChatUncheckedCreateWithoutResourceInput> | Prisma.ChatCreateWithoutResourceInput[] | Prisma.ChatUncheckedCreateWithoutResourceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutResourceInput | Prisma.ChatCreateOrConnectWithoutResourceInput[]
+  createMany?: Prisma.ChatCreateManyResourceInputEnvelope
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+}
+
+export type ChatUncheckedCreateNestedManyWithoutResourceInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutResourceInput, Prisma.ChatUncheckedCreateWithoutResourceInput> | Prisma.ChatCreateWithoutResourceInput[] | Prisma.ChatUncheckedCreateWithoutResourceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutResourceInput | Prisma.ChatCreateOrConnectWithoutResourceInput[]
+  createMany?: Prisma.ChatCreateManyResourceInputEnvelope
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+}
+
+export type ChatUpdateManyWithoutResourceNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutResourceInput, Prisma.ChatUncheckedCreateWithoutResourceInput> | Prisma.ChatCreateWithoutResourceInput[] | Prisma.ChatUncheckedCreateWithoutResourceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutResourceInput | Prisma.ChatCreateOrConnectWithoutResourceInput[]
+  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutResourceInput | Prisma.ChatUpsertWithWhereUniqueWithoutResourceInput[]
+  createMany?: Prisma.ChatCreateManyResourceInputEnvelope
+  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  update?: Prisma.ChatUpdateWithWhereUniqueWithoutResourceInput | Prisma.ChatUpdateWithWhereUniqueWithoutResourceInput[]
+  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutResourceInput | Prisma.ChatUpdateManyWithWhereWithoutResourceInput[]
+  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+}
+
+export type ChatUncheckedUpdateManyWithoutResourceNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutResourceInput, Prisma.ChatUncheckedCreateWithoutResourceInput> | Prisma.ChatCreateWithoutResourceInput[] | Prisma.ChatUncheckedCreateWithoutResourceInput[]
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutResourceInput | Prisma.ChatCreateOrConnectWithoutResourceInput[]
+  upsert?: Prisma.ChatUpsertWithWhereUniqueWithoutResourceInput | Prisma.ChatUpsertWithWhereUniqueWithoutResourceInput[]
+  createMany?: Prisma.ChatCreateManyResourceInputEnvelope
+  set?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  disconnect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  delete?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  connect?: Prisma.ChatWhereUniqueInput | Prisma.ChatWhereUniqueInput[]
+  update?: Prisma.ChatUpdateWithWhereUniqueWithoutResourceInput | Prisma.ChatUpdateWithWhereUniqueWithoutResourceInput[]
+  updateMany?: Prisma.ChatUpdateManyWithWhereWithoutResourceInput | Prisma.ChatUpdateManyWithWhereWithoutResourceInput[]
+  deleteMany?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+}
+
 export type ChatCreateNestedOneWithoutUser_chatsInput = {
   create?: Prisma.XOR<Prisma.ChatCreateWithoutUser_chatsInput, Prisma.ChatUncheckedCreateWithoutUser_chatsInput>
   connectOrCreate?: Prisma.ChatCreateOrConnectWithoutUser_chatsInput
@@ -459,6 +541,68 @@ export type ChatUpdateOneRequiredWithoutUser_chatsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChatUpdateToOneWithWhereWithoutUser_chatsInput, Prisma.ChatUpdateWithoutUser_chatsInput>, Prisma.ChatUncheckedUpdateWithoutUser_chatsInput>
 }
 
+export type ChatCreateWithoutResourceInput = {
+  id?: bigint | number
+  title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
+  created_at?: Date | string
+  user_chats?: Prisma.UserChatCreateNestedManyWithoutChatInput
+}
+
+export type ChatUncheckedCreateWithoutResourceInput = {
+  id?: bigint | number
+  title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
+  created_at?: Date | string
+  user_chats?: Prisma.UserChatUncheckedCreateNestedManyWithoutChatInput
+}
+
+export type ChatCreateOrConnectWithoutResourceInput = {
+  where: Prisma.ChatWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChatCreateWithoutResourceInput, Prisma.ChatUncheckedCreateWithoutResourceInput>
+}
+
+export type ChatCreateManyResourceInputEnvelope = {
+  data: Prisma.ChatCreateManyResourceInput | Prisma.ChatCreateManyResourceInput[]
+  skipDuplicates?: boolean
+}
+
+export type ChatUpsertWithWhereUniqueWithoutResourceInput = {
+  where: Prisma.ChatWhereUniqueInput
+  update: Prisma.XOR<Prisma.ChatUpdateWithoutResourceInput, Prisma.ChatUncheckedUpdateWithoutResourceInput>
+  create: Prisma.XOR<Prisma.ChatCreateWithoutResourceInput, Prisma.ChatUncheckedCreateWithoutResourceInput>
+}
+
+export type ChatUpdateWithWhereUniqueWithoutResourceInput = {
+  where: Prisma.ChatWhereUniqueInput
+  data: Prisma.XOR<Prisma.ChatUpdateWithoutResourceInput, Prisma.ChatUncheckedUpdateWithoutResourceInput>
+}
+
+export type ChatUpdateManyWithWhereWithoutResourceInput = {
+  where: Prisma.ChatScalarWhereInput
+  data: Prisma.XOR<Prisma.ChatUpdateManyMutationInput, Prisma.ChatUncheckedUpdateManyWithoutResourceInput>
+}
+
+export type ChatScalarWhereInput = {
+  AND?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+  OR?: Prisma.ChatScalarWhereInput[]
+  NOT?: Prisma.ChatScalarWhereInput | Prisma.ChatScalarWhereInput[]
+  id?: Prisma.BigIntFilter<"Chat"> | bigint | number
+  title?: Prisma.StringFilter<"Chat"> | string
+  budget?: Prisma.DecimalFilter<"Chat"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFilter<"Chat"> | number
+  materials?: Prisma.IntFilter<"Chat"> | number
+  level_workers?: Prisma.IntFilter<"Chat"> | number
+  resource_id?: Prisma.BigIntFilter<"Chat"> | bigint | number
+  created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
+}
+
 export type ChatCreateWithoutUser_chatsInput = {
   id?: bigint | number
   title: string
@@ -467,6 +611,7 @@ export type ChatCreateWithoutUser_chatsInput = {
   materials?: number
   level_workers?: number
   created_at?: Date | string
+  resource?: Prisma.ResourceCreateNestedOneWithoutChatsInput
 }
 
 export type ChatUncheckedCreateWithoutUser_chatsInput = {
@@ -476,6 +621,7 @@ export type ChatUncheckedCreateWithoutUser_chatsInput = {
   food?: number
   materials?: number
   level_workers?: number
+  resource_id?: bigint | number
   created_at?: Date | string
 }
 
@@ -503,9 +649,53 @@ export type ChatUpdateWithoutUser_chatsInput = {
   materials?: Prisma.IntFieldUpdateOperationsInput | number
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resource?: Prisma.ResourceUpdateOneRequiredWithoutChatsNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutUser_chatsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  resource_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ChatCreateManyResourceInput = {
+  id?: bigint | number
+  title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  level_workers?: number
+  created_at?: Date | string
+}
+
+export type ChatUpdateWithoutResourceInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_chats?: Prisma.UserChatUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateWithoutResourceInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_chats?: Prisma.UserChatUncheckedUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateManyWithoutResourceInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -553,7 +743,9 @@ export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   food?: boolean
   materials?: boolean
   level_workers?: boolean
+  resource_id?: boolean
   created_at?: boolean
+  resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
   user_chats?: boolean | Prisma.Chat$user_chatsArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
@@ -565,7 +757,9 @@ export type ChatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   food?: boolean
   materials?: boolean
   level_workers?: boolean
+  resource_id?: boolean
   created_at?: boolean
+  resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -575,7 +769,9 @@ export type ChatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   food?: boolean
   materials?: boolean
   level_workers?: boolean
+  resource_id?: boolean
   created_at?: boolean
+  resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
 export type ChatSelectScalar = {
@@ -585,20 +781,27 @@ export type ChatSelectScalar = {
   food?: boolean
   materials?: boolean
   level_workers?: boolean
+  resource_id?: boolean
   created_at?: boolean
 }
 
-export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "budget" | "food" | "materials" | "level_workers" | "created_at", ExtArgs["result"]["chat"]>
+export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "budget" | "food" | "materials" | "level_workers" | "resource_id" | "created_at", ExtArgs["result"]["chat"]>
 export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
   user_chats?: boolean | Prisma.Chat$user_chatsArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type ChatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type ChatIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ChatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
+}
+export type ChatIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
+}
 
 export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Chat"
   objects: {
+    resource: Prisma.$ResourcePayload<ExtArgs>
     user_chats: Prisma.$UserChatPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -608,6 +811,7 @@ export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     food: number
     materials: number
     level_workers: number
+    resource_id: bigint
     created_at: Date
   }, ExtArgs["result"]["chat"]>
   composites: {}
@@ -1003,6 +1207,7 @@ readonly fields: ChatFieldRefs;
  */
 export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  resource<T extends Prisma.ResourceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResourceDefaultArgs<ExtArgs>>): Prisma.Prisma__ResourceClient<runtime.Types.Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user_chats<T extends Prisma.Chat$user_chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$user_chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1039,6 +1244,7 @@ export interface ChatFieldRefs {
   readonly food: Prisma.FieldRef<"Chat", 'Int'>
   readonly materials: Prisma.FieldRef<"Chat", 'Int'>
   readonly level_workers: Prisma.FieldRef<"Chat", 'Int'>
+  readonly resource_id: Prisma.FieldRef<"Chat", 'BigInt'>
   readonly created_at: Prisma.FieldRef<"Chat", 'DateTime'>
 }
     
@@ -1289,6 +1495,10 @@ export type ChatCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.ChatCreateManyInput | Prisma.ChatCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1359,6 +1569,10 @@ export type ChatUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Chats to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

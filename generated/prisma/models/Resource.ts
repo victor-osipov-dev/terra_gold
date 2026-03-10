@@ -212,6 +212,7 @@ export type ResourceWhereInput = {
   name?: Prisma.StringFilter<"Resource"> | string
   number?: Prisma.DecimalFilter<"Resource"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"Resource"> | Date | string
+  chats?: Prisma.ChatListRelationFilter
 }
 
 export type ResourceOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type ResourceOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   number?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  chats?: Prisma.ChatOrderByRelationAggregateInput
 }
 
 export type ResourceWhereUniqueInput = Prisma.AtLeast<{
@@ -229,6 +231,7 @@ export type ResourceWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Resource"> | string
   number?: Prisma.DecimalFilter<"Resource"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"Resource"> | Date | string
+  chats?: Prisma.ChatListRelationFilter
 }, "id">
 
 export type ResourceOrderByWithAggregationInput = {
@@ -258,6 +261,7 @@ export type ResourceCreateInput = {
   name: string
   number: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  chats?: Prisma.ChatCreateNestedManyWithoutResourceInput
 }
 
 export type ResourceUncheckedCreateInput = {
@@ -265,6 +269,7 @@ export type ResourceUncheckedCreateInput = {
   name: string
   number: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
+  chats?: Prisma.ChatUncheckedCreateNestedManyWithoutResourceInput
 }
 
 export type ResourceUpdateInput = {
@@ -272,6 +277,7 @@ export type ResourceUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chats?: Prisma.ChatUpdateManyWithoutResourceNestedInput
 }
 
 export type ResourceUncheckedUpdateInput = {
@@ -279,6 +285,7 @@ export type ResourceUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chats?: Prisma.ChatUncheckedUpdateManyWithoutResourceNestedInput
 }
 
 export type ResourceCreateManyInput = {
@@ -300,6 +307,11 @@ export type ResourceUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ResourceScalarRelationFilter = {
+  is?: Prisma.ResourceWhereInput
+  isNot?: Prisma.ResourceWhereInput
 }
 
 export type ResourceCountOrderByAggregateInput = {
@@ -333,6 +345,93 @@ export type ResourceSumOrderByAggregateInput = {
   number?: Prisma.SortOrder
 }
 
+export type ResourceCreateNestedOneWithoutChatsInput = {
+  create?: Prisma.XOR<Prisma.ResourceCreateWithoutChatsInput, Prisma.ResourceUncheckedCreateWithoutChatsInput>
+  connectOrCreate?: Prisma.ResourceCreateOrConnectWithoutChatsInput
+  connect?: Prisma.ResourceWhereUniqueInput
+}
+
+export type ResourceUpdateOneRequiredWithoutChatsNestedInput = {
+  create?: Prisma.XOR<Prisma.ResourceCreateWithoutChatsInput, Prisma.ResourceUncheckedCreateWithoutChatsInput>
+  connectOrCreate?: Prisma.ResourceCreateOrConnectWithoutChatsInput
+  upsert?: Prisma.ResourceUpsertWithoutChatsInput
+  connect?: Prisma.ResourceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResourceUpdateToOneWithWhereWithoutChatsInput, Prisma.ResourceUpdateWithoutChatsInput>, Prisma.ResourceUncheckedUpdateWithoutChatsInput>
+}
+
+export type ResourceCreateWithoutChatsInput = {
+  id?: bigint | number
+  name: string
+  number: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+}
+
+export type ResourceUncheckedCreateWithoutChatsInput = {
+  id?: bigint | number
+  name: string
+  number: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+}
+
+export type ResourceCreateOrConnectWithoutChatsInput = {
+  where: Prisma.ResourceWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResourceCreateWithoutChatsInput, Prisma.ResourceUncheckedCreateWithoutChatsInput>
+}
+
+export type ResourceUpsertWithoutChatsInput = {
+  update: Prisma.XOR<Prisma.ResourceUpdateWithoutChatsInput, Prisma.ResourceUncheckedUpdateWithoutChatsInput>
+  create: Prisma.XOR<Prisma.ResourceCreateWithoutChatsInput, Prisma.ResourceUncheckedCreateWithoutChatsInput>
+  where?: Prisma.ResourceWhereInput
+}
+
+export type ResourceUpdateToOneWithWhereWithoutChatsInput = {
+  where?: Prisma.ResourceWhereInput
+  data: Prisma.XOR<Prisma.ResourceUpdateWithoutChatsInput, Prisma.ResourceUncheckedUpdateWithoutChatsInput>
+}
+
+export type ResourceUpdateWithoutChatsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ResourceUncheckedUpdateWithoutChatsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ResourceCountOutputType
+ */
+
+export type ResourceCountOutputType = {
+  chats: number
+}
+
+export type ResourceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chats?: boolean | ResourceCountOutputTypeCountChatsArgs
+}
+
+/**
+ * ResourceCountOutputType without action
+ */
+export type ResourceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResourceCountOutputType
+   */
+  select?: Prisma.ResourceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ResourceCountOutputType without action
+ */
+export type ResourceCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatWhereInput
+}
 
 
 export type ResourceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -340,6 +439,8 @@ export type ResourceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name?: boolean
   number?: boolean
   created_at?: boolean
+  chats?: boolean | Prisma.Resource$chatsArgs<ExtArgs>
+  _count?: boolean | Prisma.ResourceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["resource"]>
 
 export type ResourceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -364,10 +465,18 @@ export type ResourceSelectScalar = {
 }
 
 export type ResourceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "number" | "created_at", ExtArgs["result"]["resource"]>
+export type ResourceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chats?: boolean | Prisma.Resource$chatsArgs<ExtArgs>
+  _count?: boolean | Prisma.ResourceCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ResourceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ResourceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $ResourcePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Resource"
-  objects: {}
+  objects: {
+    chats: Prisma.$ChatPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
     name: string
@@ -767,6 +876,7 @@ readonly fields: ResourceFieldRefs;
  */
 export interface Prisma__ResourceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  chats<T extends Prisma.Resource$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Resource$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -817,6 +927,10 @@ export type ResourceFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  /**
    * Filter, which Resource to fetch.
    */
   where: Prisma.ResourceWhereUniqueInput
@@ -835,6 +949,10 @@ export type ResourceFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  /**
    * Filter, which Resource to fetch.
    */
   where: Prisma.ResourceWhereUniqueInput
@@ -852,6 +970,10 @@ export type ResourceFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Resource
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
   /**
    * Filter, which Resource to fetch.
    */
@@ -901,6 +1023,10 @@ export type ResourceFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  /**
    * Filter, which Resource to fetch.
    */
   where?: Prisma.ResourceWhereInput
@@ -949,6 +1075,10 @@ export type ResourceFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  /**
    * Filter, which Resources to fetch.
    */
   where?: Prisma.ResourceWhereInput
@@ -991,6 +1121,10 @@ export type ResourceCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Resource
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
   /**
    * The data needed to create a Resource.
    */
@@ -1039,6 +1173,10 @@ export type ResourceUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Resource
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
   /**
    * The data needed to update a Resource.
    */
@@ -1106,6 +1244,10 @@ export type ResourceUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  /**
    * The filter to search for the Resource to update in case it exists.
    */
   where: Prisma.ResourceWhereUniqueInput
@@ -1132,6 +1274,10 @@ export type ResourceDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  /**
    * Filter which Resource to delete.
    */
   where: Prisma.ResourceWhereUniqueInput
@@ -1152,6 +1298,30 @@ export type ResourceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Resource.chats
+ */
+export type Resource$chatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Chat
+   */
+  select?: Prisma.ChatSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Chat
+   */
+  omit?: Prisma.ChatOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatInclude<ExtArgs> | null
+  where?: Prisma.ChatWhereInput
+  orderBy?: Prisma.ChatOrderByWithRelationInput | Prisma.ChatOrderByWithRelationInput[]
+  cursor?: Prisma.ChatWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
+}
+
+/**
  * Resource without action
  */
 export type ResourceDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1163,4 +1333,8 @@ export type ResourceDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Resource
    */
   omit?: Prisma.ResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
 }

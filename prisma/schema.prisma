@@ -25,6 +25,9 @@ model Chat {
   materials  Int    @default(0)
   level_workers Int @default(1)
 
+  resource_id         BigInt @default(1)
+  resource      Resource @relation(fields: [resource_id], references: [id])
+
   created_at DateTime    @default(now())
 
   user_chats  UserChat[]  // связь с промежуточной таблицей
@@ -35,6 +38,8 @@ model Resource {
   name      String
   number      Decimal  @db.Decimal(10, 3)
   created_at DateTime    @default(now())
+
+  chats      Chat[]
 }
 
 // Промежуточная таблица для связи многие ко многим с данными
