@@ -6,18 +6,17 @@ export default function startCommand(bot: Telegraf<Context>) {
         const msg = ctx.message;
         const user = msg.from;
         const chat = msg.chat;
+        const resources = await prisma.resource.findMany();
 
         await ctx.reply(
-            "Выберите действие:",
+            "⛏️Что следует добывать вашему государству?",
             Markup.inlineKeyboard([
-                [
-                    Markup.button.callback("Кнопка 1", "btn_1"),
-                    Markup.button.callback("Кнопка 2", "btn_2"),
-                ],
-                [
-                    Markup.button.callback("Кнопка 3", "btn_3"),
-                    Markup.button.callback("Кнопка 4", "btn_4"),
-                ],
+                resources.map((resource) =>
+                    Markup.button.callback(
+                        resource.name,
+                        "btn_cnange_resource_" + resource.id,
+                    ),
+                ),
             ]),
         );
     });
