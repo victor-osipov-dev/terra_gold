@@ -1,8 +1,9 @@
 import { Context, Telegraf } from "telegraf";
 import { prisma } from "../api";
 import { Decimal } from "@prisma/client/runtime/client";
+import { MyContext } from "../types";
 
-export default function startCommand(bot: Telegraf<Context>) {
+export default function startCommand(bot: Telegraf<MyContext>) {
     // слушаем ВСЕ типы сообщений
     bot.on("message", async (ctx) => {
         const msg = ctx.message;
@@ -133,6 +134,16 @@ export default function startCommand(bot: Telegraf<Context>) {
                 });
             }
         }
+
+        if (ctx.session.state?.type === "deposit") {
+            if ('text' in msg) {
+                const amount = parseFloat(msg.text)
+                ctx.reply(`Пополнение на ${amount}`)
+            }
+            
+        }
+
+        if (ctx.session?.state) ctx.session.state = undefined;
 
         // ctx.sendMessage("Принято");
     });

@@ -1,7 +1,8 @@
 import { Context, Telegraf } from "telegraf";
 import { prisma } from "../api";
+import { MyContext } from "../types";
 
-export default function startCommand(bot: Telegraf<Context>) {
+export default function startCommand(bot: Telegraf<MyContext>) {
     bot.command(/.*/, async (ctx, next) => {
         const msg = ctx.message;
         const user = msg.from;
@@ -27,6 +28,8 @@ export default function startCommand(bot: Telegraf<Context>) {
             },
             include: { resource: true },
         });
+
+        if (ctx.session?.state) ctx.session.state = undefined;
 
         await next(); // передаём управление конкретной команде
     });

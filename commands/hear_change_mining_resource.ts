@@ -2,11 +2,11 @@ import { Context, Telegraf } from "telegraf";
 import { prisma } from "../api";
 
 export default function startCommand(bot: Telegraf<Context>) {
-    bot.on("callback_query", async (ctx) => {
+    bot.action(/btn_cnange_resource_(\d+)/, async (ctx) => {
+        const resource_id = Number(ctx.match[1]);
+        await ctx.answerCbQuery();
         const chat = ctx.chat;
 
-        const callbackData = ctx.callbackQuery.data;
-        const resource_id = callbackData.split("_").at(-1);
         const resource = await prisma.resource.findUnique({
             where: {
                 id: resource_id,
