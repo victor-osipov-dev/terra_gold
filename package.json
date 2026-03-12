@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "tsx watch bot.ts"
+        "dev": "tsx watch bot.ts",
+        "format": "prettier . --write"
     },
     "keywords": [],
     "author": "",
