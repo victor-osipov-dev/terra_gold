@@ -1,8 +1,9 @@
-import { Context, Telegraf } from "telegraf";
+import { Telegraf } from "telegraf";
 import { readdirSync } from "fs";
 import path from "path";
+import { MyContext } from "./types";
 
-export async function applyCommands(bot: Telegraf<Context>) {
+export async function applyCommands(bot: Telegraf<MyContext>) {
     const commandsPath = path.resolve("commands");
     const commandFiles = readdirSync(commandsPath).filter((f) =>
         f.endsWith(".ts"),
