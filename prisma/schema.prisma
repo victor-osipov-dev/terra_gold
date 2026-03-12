@@ -22,7 +22,8 @@ model Chat {
   title      String
   budget     Decimal  @db.Decimal(10, 3) @default(0)
   food       Int    @default(10)
-  materials  Int    @default(0)
+  materials  Int    @default(10)
+  tools  Int    @default(10)
   level_workers Int @default(1)
 
   resource_id         BigInt @default(1)

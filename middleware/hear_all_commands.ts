@@ -1,5 +1,5 @@
 import { Context, Telegraf } from "telegraf";
-import { prisma } from "../api";
+import { findOrCreateChatAndUser, prisma } from "../api";
 import { MyContext } from "../types";
 
 export default function startCommand(bot: Telegraf<MyContext>) {
@@ -8,26 +8,7 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         const user = msg.from;
         const chat = msg.chat;
 
-        const new_user = await prisma.user.upsert({
-            where: { id: user.id },
-            update: {},
-            create: {
-                id: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name ?? "",
-                username: user.username ?? "",
-            },
-        });
-
-        const new_chat = await prisma.chat.upsert({
-            where: { id: chat.id },
-            update: {},
-            create: {
-                id: chat.id,
-                title: "title" in chat ? chat.title : "Chat",
-            },
-            include: { resource: true },
-        });
+        findOrCreateChatAndUser({ user, chat });
 
         if (ctx.session?.state) ctx.session.state = undefined;
 

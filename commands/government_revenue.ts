@@ -11,12 +11,15 @@ export default function startCommand(bot: Telegraf<Context>) {
 
         const currentChat = await prisma.chat.findFirst({
             where: { id: chat.id },
+            include: { resource: true },
         });
 
         response +=
             `Заработано: $${currentChat?.budget}\n` +
             `Еда: ${currentChat?.food} ед.\n` +
             `Материалы: ${currentChat?.materials} ед.\n` +
+            `Инструменты: ${currentChat?.tools} ед.\n` +
+            `Добываемый ресурс: ${currentChat?.resource.name}\n` +
             `Уровень работников: ${currentChat?.level_workers}`;
 
         ctx.reply(response);

@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Chat" ADD COLUMN     "tools" INTEGER NOT NULL DEFAULT 10,
+ALTER COLUMN "materials" SET DEFAULT 10;

@@ -9,13 +9,10 @@ export default function startCommand(bot: Telegraf<MyContext>) {
 
         ctx.session = {
             state: {
-                type: 'deposit'
-            }
-        }
-        
+                type: "deposit",
+            },
+        };
 
-        await ctx.editMessageText(
-            `📩Укажите число`,
-        );
+        await ctx.editMessageText(`📩Укажите число`);
     });
 }

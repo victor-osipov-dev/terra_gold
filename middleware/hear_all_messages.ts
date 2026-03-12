@@ -1,7 +1,8 @@
 import { Context, Telegraf } from "telegraf";
-import { prisma } from "../api";
+import { findOrCreateChatAndUser, prisma } from "../api";
 import { Decimal } from "@prisma/client/runtime/client";
 import { MyContext } from "../types";
+import { randomInteger } from "../utils/random";
 
 export default function startCommand(bot: Telegraf<MyContext>) {
     // слушаем ВСЕ типы сообщений
@@ -10,26 +11,8 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         const user = msg.from;
         const chat = msg.chat;
 
-        const new_user = await prisma.user.upsert({
-            where: { id: user.id },
-            update: {},
-            create: {
-                id: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name ?? "",
-                username: user.username ?? "",
-            },
-        });
-
-        const new_chat = await prisma.chat.upsert({
-            where: { id: chat.id },
-            update: {},
-            create: {
-                id: chat.id,
-                title: "title" in chat ? chat.title : "Chat",
-            },
-            include: { resource: true },
-        });
+        const { user: new_user, chat: new_chat } =
+            await findOrCreateChatAndUser({ user, chat });
 
         let user_chat = await prisma.userChat.findFirst({
             where: { user_id: new_user.id, chat_id: new_chat.id },
@@ -60,91 +43,56 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         }
 
         if (user_chat.messages_per_hour <= 3) {
-            await prisma.$transaction(async (tx) => {
-                let income = new Decimal(0.001 * new_chat.level_workers);
-
-                const result = await tx.resource.updateMany({
-                    where: {
-                        id: new_chat.resource_id,
-                        number: { gte: income },
-                    },
-                    data: {
-                        number: { decrement: income },
-                    },
-                });
-
-                if (result.count === 0) {
-                    const resource = await tx.resource.findUnique({
-                        where: { id: new_chat.resource_id },
-                    });
-
-                    if (!resource || resource.number.eq(0)) {
-                        return;
-                    }
-
-                    income = resource.number;
-
-                    await tx.resource.update({
-                        where: { id: new_chat.resource_id },
-                        data: {
-                            number: { decrement: income },
-                        },
-                    });
-                }
-
-                await tx.chat.update({
-                    where: { id: new_chat.id },
-                    data: {
-                        budget: { increment: income },
-                    },
-                });
-            });
+            let chat_food = 0;
+            let chat_materials = 0;
+            let chat_tools = 0;
 
             if (
                 new_chat.resource.name == "Растения" ||
                 new_chat.resource.name == "Животные"
             ) {
-                await prisma.chat.update({
-                    where: { id: new_chat.id },
-                    data: {
-                        food: {
-                            increment: 1,
-                        },
-                    },
-                });
+                chat_food = 1;
             } else if (
                 new_chat.resource.name == "Фабрики" ||
                 new_chat.resource.name == "Шахты"
             ) {
-                await prisma.chat.update({
-                    where: { id: new_chat.id },
-                    data: {
-                        materials: {
-                            increment: 2,
-                        },
-                    },
-                });
-                await prisma.chat.update({
-                    where: { id: new_chat.id },
-                    data: {
-                        food: {
-                            decrement: 1,
-                        },
-                    },
-                });
+                chat_materials = 1;
+                chat_food = -1;
             }
+
+            if (randomInteger(1, 10) <= 5) {
+                chat_tools = -1;
+            }
+
+            await prisma.$transaction(async (tx) => {
+                const income = new Decimal(0.001 * new_chat.level_workers);
+
+                const [spent] = await tx.$queryRaw<{ spent: Decimal }[]>`
+                    UPDATE "Resource"
+                    SET number = number - LEAST(number, ${income})
+                    WHERE id = ${new_chat.resource_id}
+                    RETURNING LEAST(number, ${income}) as spent;
+                `;
+
+                await tx.chat.update({
+                    where: { id: new_chat.id },
+                    data: {
+                        budget: { increment: spent.spent },
+                        food: { increment: chat_food },
+                        materials: { increment: chat_materials },
+                        tools: { increment: chat_tools },
+                    },
+                });
+            });
         }
 
-        if (ctx.session.state?.type === "deposit") {
-            if ('text' in msg) {
-                const amount = parseFloat(msg.text)
-                ctx.reply(`Пополнение на ${amount}`)
+        if (ctx.session?.state?.type === "deposit") {
+            if ("text" in msg) {
+                const amount = parseFloat(msg.text);
+                ctx.reply(`Пополнение на ${amount}`);
             }
-            
         }
 
         if (ctx.session?.state) ctx.session.state = undefined;
-
-        // ctx.sendMessage("Принято");
     });
 }

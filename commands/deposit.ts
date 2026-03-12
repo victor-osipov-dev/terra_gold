@@ -7,8 +7,6 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         const user = msg.from;
         const chat = msg.chat;
 
-        
-
         let response = `📩Полполнение USDT через Telegram кошелёк.\nВыберите сумму:\n`;
 
         await ctx.reply(

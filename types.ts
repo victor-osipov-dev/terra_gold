@@ -2,7 +2,7 @@ import { Context } from "telegraf";
 
 export interface SessionData {
     state?: {
-        type: "deposit"
+        type: "deposit";
     };
 }
 

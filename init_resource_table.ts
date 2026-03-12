@@ -18,4 +18,4 @@ await prisma.resource.createMany({
     ],
 });
 
-console.log('Создание таблицы выполнено');
+console.log("Создание таблицы выполнено");

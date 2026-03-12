@@ -1,26 +1,27 @@
 {
-  "name": "terra_gold",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "tsx watch bot.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "dependencies": {
-    "@prisma/adapter-pg": "^7.4.2",
-    "@prisma/client": "^7.4.2",
-    "@prisma/config": "^7.4.2",
-    "dotenv": "^17.3.1",
-    "node-cron": "^4.2.1",
-    "telegraf": "^4.16.3"
-  },
-  "devDependencies": {
-    "@types/node": "^25.3.5",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
-  }
+    "name": "terra_gold",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "tsx watch bot.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "@prisma/adapter-pg": "^7.4.2",
+        "@prisma/client": "^7.4.2",
+        "@prisma/config": "^7.4.2",
+        "dotenv": "^17.3.1",
+        "node-cron": "^4.2.1",
+        "prettier": "^3.8.1",
+        "telegraf": "^4.16.3"
+    },
+    "devDependencies": {
+        "@types/node": "^25.3.5",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3"
+    }
 }
