@@ -7,20 +7,23 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         const user = msg.from;
         const chat = msg.chat;
 
-        let response = `📩Полполнение USDT через Telegram кошелёк.\nВыберите сумму:\n`;
+        // if (ctx.chat?.type !== "private") {
+        //     return ctx.reply("❗ Откройте бота в личных сообщениях для пополнения.");
+        // }
 
-        await ctx.reply(
-            response,
+        ctx.reply(
+            "Запустить приложение t.me/Terra_Gold_Bot/terragold_deposit",
             Markup.inlineKeyboard([
-                [
-                    Markup.button.callback("1", "deposit_1"),
-                    Markup.button.callback("5", "deposit_5"),
-                ],
-                [
-                    Markup.button.callback("10", "deposit_10"),
-                    Markup.button.callback("Своя сумма", "deposit_custom"),
-                ],
-            ]),
+                // Markup.button.webApp(
+                // "📩 Пополнить",
+                // "https://ai-box-cars.ru"
+                // )
+                Markup.button.url(
+  "💳 Пополнить",
+//   "https://t.me/YOUR_BOT_USERNAME?start=deposit"
+  "t.me/Terra_Gold_Bot/terragold_deposit"
+)
+            ])
         );
     });
 }
