@@ -20,6 +20,8 @@ export async function findOrCreateChatAndUser({
     user: User;
     chat: Chat.PrivateChat | Chat.GroupChat | Chat.SupergroupChat;
 }) {
+    console.log("findOrCreateChatAndUser");
+
     const new_user = await prisma.user.upsert({
         where: { id: user.id },
         update: {},

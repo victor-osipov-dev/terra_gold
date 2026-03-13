@@ -11,7 +11,6 @@ async function resetStatisticsForHour() {
 
 cron.schedule("0 * * * *", async () => {
     try {
-        console.log("Запуск часовой статистики...");
         await resetStatisticsForHour();
         console.log("resetStatisticsForHour выполнена");
     } catch (error) {

@@ -1,32 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { NCard, NAvatar, NTag, NButton, NSpace, NDivider } from "naive-ui";
 
+import { TonConnectUI } from "@tonconnect/ui";
 import { useRoute } from "vue-router";
 import WebApp from "@twa-dev/sdk";
-import { tonConnectUI } from "../api";
 
 const route = useRoute();
 const user = WebApp.initDataUnsafe.user;
-const data = ref(null);
 
-fetch("https://ai-box-cars.ru:8000/api/verify", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        initData: WebApp.initData,
-    }),
-})
-    .then((response) => response.json())
-    .then((json) => {
-        console.log(json);
-        data.value = json;
-    })
-    .catch((err) => {
-        data.value = "err";
-    });
+const walletAddress = ref(null);
+
+let tonConnectUI = new TonConnectUI({
+    manifestUrl: "https://ai-box-cars.ru/tonconnect-manifest.json",
+});
 
 tonConnectUI.onStatusChange((wallet) => {
     walletAddress.value = wallet?.account?.address || null;
@@ -38,8 +25,8 @@ async function connectWallet() {
 
 if (route.query.action == "deposit") {
     setTimeout(() => {
-        // connectWallet();
         if (!walletAddress) {
+            connectWallet();
         }
     }, 1000);
 }
@@ -47,7 +34,6 @@ if (route.query.action == "deposit") {
 
 <template>
     <div class="mobile-wrapper">
-        <!-- <pre>{{ walletRef }}</pre> -->
         <n-card class="profile-card">
             <!-- HEADER -->
             <div class="profile-header">
@@ -61,9 +47,6 @@ if (route.query.action == "deposit") {
             </div>
 
             <n-divider />
-            <div>{{ data }}</div>
-            <hr />
-            <!-- {{ JSON.stringify(data, null, 2) }} -->
 
             <!-- FARM INFO -->
             <n-space vertical>
@@ -93,8 +76,8 @@ if (route.query.action == "deposit") {
                 </n-button>
 
                 <n-tag v-else type="success" round>
-                    💎 {{ walletAddress?.slice(0, 6) }}...{{
-                        walletAddress?.slice(-4)
+                    💎 {{ walletAddress.slice(0, 6) }}...{{
+                        walletAddress.slice(-4)
                     }}
                 </n-tag>
             </div>

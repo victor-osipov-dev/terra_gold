@@ -19,11 +19,11 @@ export default function startCommand(bot: Telegraf<MyContext>) {
                 // "https://ai-box-cars.ru"
                 // )
                 Markup.button.url(
-  "💳 Пополнить",
-//   "https://t.me/YOUR_BOT_USERNAME?start=deposit"
-  "t.me/Terra_Gold_Bot/terragold_deposit"
-)
-            ])
+                    "💳 Пополнить",
+                    //   "https://t.me/YOUR_BOT_USERNAME?start=deposit"
+                    "t.me/Terra_Gold_Bot/terragold_deposit",
+                ),
+            ]),
         );
     });
 }
