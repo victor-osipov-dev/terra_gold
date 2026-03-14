@@ -24,10 +24,11 @@ services:
         container_name: adminer-nginx
         restart: always
         ports:
-            - "443:443" # HTTPS наружу
+            - "443:443" # Telegram Mini Apps
             - "80:80" # редирект HTTP → HTTPS
-            - "8080:8080" # редирект HTTP → HTTPS
-            - "8000:8000" # редирект HTTP → HTTPS
+            - "8080:8080" # Админ панель базы данных
+            - "8000:8000" # API
+            - "5000:5000" # API
         extra_hosts:
             - "host.docker.internal:host-gateway"
         volumes:

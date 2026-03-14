@@ -12,7 +12,7 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         // }
 
         ctx.reply(
-            "➡️ Пополнение в приложени t.me/Terra_Gold_Bot/terragold_deposit",
+            "➡️ Пополнение в приложении t.me/Terra_Gold_Bot/terragold_deposit",
             Markup.inlineKeyboard([
                 Markup.button.url(
                     "💳 Пополнить",

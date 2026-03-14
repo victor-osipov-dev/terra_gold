@@ -15,3 +15,6 @@ npm run dev -- --host 0.0.0.0 --port 3000
 ## Bot node.js
 
 npm run dev
+
+## Ton Webhook
+npx tsx --watch ton.ts
