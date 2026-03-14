@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "balance" DECIMAL(10,3) NOT NULL DEFAULT 0;

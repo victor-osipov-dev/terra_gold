@@ -43,7 +43,8 @@ async function deposit() {
     };
 
     try {
-        await tonConnectUI.sendTransaction(tx);
+        const response = await tonConnectUI.sendTransaction(tx);
+        
     } catch (e) {
         console.error("Transaction failed", e);
     }

@@ -1,18 +1,20 @@
-import express from "express";
+
+import express, { Request, Response } from "express";
 import cors from "cors";
 import { verifyTelegramInitData } from "./libs";
+import { prisma } from "./api";
 
 export const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
     res.json({
         ok: true,
     });
 });
 
-app.post("/api/verify", (req, res) => {
+app.post("/api/verify", async (req: Request, res: Response) => {
     const { initData } = req.body;
 
     if (!verifyTelegramInitData(initData)) {
@@ -20,10 +22,29 @@ app.post("/api/verify", (req, res) => {
     }
 
     const params = new URLSearchParams(initData);
-    const user = JSON.parse(params.get("user"));
+    const user = JSON.parse(params.get("user") ?? '{}');
+    const db_user = await prisma.user.findUnique({
+        where: {
+            id: user.id
+        }
+    })
+    const all_chats_user_count = await prisma.userChat.count({
+        where: {
+            user_id: user.id
+        },
+    })
+    // const own_user_chats_count = await prisma.userChat.count({
+    //     where: {
+    //         user_id: user.id,
+    //     },
+    // })
 
     res.json({
         ok: true,
-        user,
+        user: {
+            ...user,
+            balance: db_user?.balance,
+            all_chats_user_count,
+        },
     });
 });

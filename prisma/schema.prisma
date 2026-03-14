@@ -12,6 +12,7 @@ model User {
   first_name String
   last_name  String
   username   String      @unique
+  balance    Decimal  @db.Decimal(10, 3) @default(0)
   created_at DateTime    @default(now())
 
   userChats  UserChat[]  // связь с промежуточной таблицей

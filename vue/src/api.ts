@@ -19,8 +19,10 @@ export function connectTON() {
         if (wallet) {
             connectedWallet.value = wallet
             resolve(wallet)
+        } else {
+            connectedWallet.value = wallet
+            reject()
         }
-        else reject()
     });
 
     return { tonConnectUI, connectedWalletPromise, connectedWallet }

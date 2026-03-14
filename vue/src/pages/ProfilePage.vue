@@ -4,37 +4,35 @@ import { NCard, NAvatar, NTag, NButton, NSpace, NDivider } from "naive-ui";
 import { useRoute, useRouter } from "vue-router";
 import WebApp from "@twa-dev/sdk";
 import { connectTON } from "../api";
+import { useQuery } from '@tanstack/vue-query'
 
 const { tonConnectUI, connectedWallet, connectedWalletPromise } = connectTON()
 
 
 const route = useRoute();
 const router = useRouter()
-const user = WebApp.initDataUnsafe.user;
 const data = ref<any>(null);
 const walletAddress = computed(() => connectedWallet.value?.account.address)
 
 
-
-fetch("https://ai-box-cars.ru:8000/api/verify", {
+// Функция запроса
+const fetchVerify = async () => {
+  const res = await fetch("https://ai-box-cars.ru:8000/api/verify", {
     method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        initData: WebApp.initData,
-    }),
-})
-    .then((response) => response.json())
-    .then((json) => {
-        console.log(json);
-        // data.value = json;
-    })
-    .catch((err) => {
-        data.value = "err";
-    });
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ initData: WebApp.initData }),
+  });
+  if (!res.ok) throw new Error("Ошибка запроса");
+  const json = await res.json();
+  return json.user;
+}
 
-
+const { data: user, isLoading, error } = useQuery({
+    queryKey: ['verify', WebApp.initData],
+    queryFn: fetchVerify,
+    initialData: WebApp.initDataUnsafe.user,
+    staleTime: 0,
+});
 
 async function connectWallet() {
     await tonConnectUI.openModal();
@@ -52,9 +50,6 @@ if (route.query.action == "deposit") {
 </script>
 
 <template>
-    <div>{{ data }} {{ walletAddress }}</div>
-    <!-- <pre>{{ walletRef }}</pre> -->
-     
     <n-card class="profile-card">
         <!-- HEADER -->
         <div class="profile-header">
@@ -72,14 +67,12 @@ if (route.query.action == "deposit") {
         <!-- FARM INFO -->
         <n-space vertical>
             <n-space justify="space-between">
-                <n-tag type="warning"> 💰 {{ 5 }} USDT </n-tag>
+                <n-tag type="warning"> 💰 {{ user?.balance }} USDT </n-tag>
+                <n-tag type="info"> 🌐 Вы в {{ user?.all_chats_user_count }} чатах </n-tag>
             </n-space>
 
-            <n-space justify="space-between">
-                <n-tag type="info"> 🌐 Вы в {{ 5 }} чатах </n-tag>
-
-                <n-tag type="info"> 💬 Ваши чаты {{ 1 }} </n-tag>
-            </n-space>
+            <!-- <n-space justify="space-between">
+            </n-space> -->
         </n-space>
 
         <n-divider />
