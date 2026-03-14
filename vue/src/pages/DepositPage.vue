@@ -1,133 +1,118 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { NCard, NAvatar, NTag, NButton, NSpace, NDivider } from "naive-ui";
+import { computed, ref, watchEffect } from "vue";
+import { NCard, NButton, NSpace, NDivider, NTag, NInputNumber } from "naive-ui";
+import { connectTON } from "../api";
+import { useRouter } from "vue-router";
 
-import { TonConnectUI } from "@tonconnect/ui";
-import { useRoute } from "vue-router";
-import WebApp from "@twa-dev/sdk";
+const router = useRouter()
+const { tonConnectUI, connectedWallet } = connectTON()
 
-const route = useRoute();
-const user = WebApp.initDataUnsafe.user;
+const walletConnected = computed(() => !!connectedWallet.value)
+const selectedAmount = ref(1);
 
-const walletAddress = ref(null);
+const amounts = [1, 5, 10, 25, 50];
 
-let tonConnectUI = new TonConnectUI({
-    manifestUrl: "https://ai-box-cars.ru/tonconnect-manifest.json",
-});
+const merchantAddress = "UQCtuLgvIXZ8z2cEosLKxKHsiPgcrepaK-VnBPaFZhTI1NZL"; // адрес для пополнения
 
-tonConnectUI.onStatusChange((wallet) => {
-    walletAddress.value = wallet?.account?.address || null;
-});
+
+
+function selectAmount(amount) {
+    selectedAmount.value = amount;
+}
 
 async function connectWallet() {
     await tonConnectUI.openModal();
 }
 
-if (route.query.action == "deposit") {
-    setTimeout(() => {
-        if (!walletAddress) {
-            connectWallet();
-        }
-    }, 1000);
+async function deposit() {
+    if (!tonConnectUI.wallet) {
+        await connectWallet();
+        return;
+    }
+
+    const amountNano = selectedAmount.value * 1e9;
+
+    const tx = {
+        validUntil: Math.floor(Date.now() / 1000) + 600,
+        messages: [
+            {
+                address: merchantAddress,
+                amount: amountNano.toString()
+            }
+        ]
+    };
+
+    try {
+        await tonConnectUI.sendTransaction(tx);
+    } catch (e) {
+        console.error("Transaction failed", e);
+    }
 }
+
+const value = ref(1)
+watchEffect(() => {
+    selectAmount(value.value)
+})
 </script>
 
 <template>
-    <div class="mobile-wrapper">
-        <n-card class="profile-card">
-            <!-- HEADER -->
-            <div class="profile-header">
-                <n-avatar round :size="70" :src="user?.photo_url" />
+    <n-button class="back-button" type="info" size="small" @click="router.push('/')">
+        Назад
+    </n-button>
+    
 
-                <div class="profile-info">
-                    <h3>{{ user?.first_name }} {{ user?.last_name }}</h3>
+    <n-card class="deposit-card" title="Пополнить TON">
 
-                    <span class="username"> @{{ user?.username }} </span>
-                </div>
-            </div>
+        <div class="amount-title">
+            Укажите сумму
+        </div>
 
-            <n-divider />
+        <n-space justify="center">
+            <n-tag v-for="amount in amounts" :key="amount" size="large"
+                :type="selectedAmount === amount ? 'success' : 'default'" class="amount-tag"
+                @click="selectAmount(amount)">
+                {{ amount }} TON
+            </n-tag>
 
-            <!-- FARM INFO -->
-            <n-space vertical>
-                <n-space justify="space-between">
-                    <n-tag type="warning"> 💰 {{ 5 }} USDT </n-tag>
-                </n-space>
+            <n-input-number v-model:value="value" min="1" max="1000"/>
+        </n-space>
 
-                <n-space justify="space-between">
-                    <n-tag type="info"> 🌐 Вы в {{ 5 }} чатах </n-tag>
+        <n-divider />
 
-                    <n-tag type="info"> 💬 Ваши чаты {{ 1 }} </n-tag>
-                </n-space>
-            </n-space>
+        <n-space vertical align="center">
 
-            <n-divider />
+            <n-button v-if="!walletConnected" type="primary" size="large" @click="connectWallet">
+                Подключить кошелёк
+            </n-button>
 
-            <!-- TON WALLET -->
-            <div class="wallet-section">
-                <n-button
-                    v-if="!walletAddress"
-                    type="primary"
-                    block
-                    round
-                    @click="connectWallet"
-                >
-                    🔗 Подключить TON кошелёк
-                </n-button>
+            <n-button v-else type="success" size="large" @click="deposit">
+                Пополнить {{ selectedAmount }} TON
+            </n-button>
 
-                <n-tag v-else type="success" round>
-                    💎 {{ walletAddress.slice(0, 6) }}...{{
-                        walletAddress.slice(-4)
-                    }}
-                </n-tag>
-            </div>
+        </n-space>
 
-            <n-divider />
-
-            <!-- ACTION BUTTONS -->
-            <n-space vertical>
-                <n-button type="success" block round>
-                    💬 Управление чатами
-                </n-button>
-
-                <n-button type="success" block round> 📩 Пополнить </n-button>
-            </n-space>
-        </n-card>
-    </div>
+    </n-card>
 </template>
 
 <style scoped>
-.mobile-wrapper {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 16px;
-
-    min-height: 100vh;
-
-    background: linear-gradient(180deg, #c8f7a4, #8ed081);
-}
-
-.profile-card {
+.deposit-card {
     border-radius: 20px;
+    max-width: 420px;
+    margin: auto;
 }
 
-.profile-header {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-}
-
-.profile-info h3 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.username {
-    opacity: 0.6;
-    font-size: 14px;
-}
-
-.wallet-section {
+.amount-title {
     text-align: center;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.amount-tag {
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 16px;
+}
+.back-button {
+    margin-bottom: 1rem;
 }
 </style>

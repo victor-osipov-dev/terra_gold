@@ -2,7 +2,7 @@ import { Telegraf } from "telegraf";
 import { readdirSync } from "fs";
 import path from "path";
 import crypto from "crypto";
-import { MyContext } from "./types";
+import type { MyContext } from "./types";
 
 export async function applyCommands(bot: Telegraf<MyContext>) {
     const commandsPath = path.resolve("commands");
@@ -16,7 +16,7 @@ export async function applyCommands(bot: Telegraf<MyContext>) {
     }
 }
 
-export function verifyTelegramInitData(initData) {
+export function verifyTelegramInitData(initData: any) {
     const urlParams = new URLSearchParams(initData);
 
     const hash = urlParams.get("hash");
@@ -26,6 +26,10 @@ export function verifyTelegramInitData(initData) {
     const dataCheckString = keys
         .map((key) => `${key}=${urlParams.get(key)}`)
         .join("\n");
+
+    if (!process.env.BOT_TOKEN) {
+        throw new Error("BOT_TOKEN is not defined");
+    }
 
     const secretKey = crypto
         .createHmac("sha256", "WebAppData")

@@ -1,5 +1,5 @@
 import { Context, Markup, Telegraf } from "telegraf";
-import { MyContext } from "../types";
+import { type MyContext } from "../types";
 
 export default function startCommand(bot: Telegraf<MyContext>) {
     bot.command("deposit", async (ctx) => {
@@ -12,15 +12,10 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         // }
 
         ctx.reply(
-            "Запустить приложение t.me/Terra_Gold_Bot/terragold_deposit",
+            "➡️ Пополнение в приложени t.me/Terra_Gold_Bot/terragold_deposit",
             Markup.inlineKeyboard([
-                // Markup.button.webApp(
-                // "📩 Пополнить",
-                // "https://ai-box-cars.ru"
-                // )
                 Markup.button.url(
                     "💳 Пополнить",
-                    //   "https://t.me/YOUR_BOT_USERNAME?start=deposit"
                     "t.me/Terra_Gold_Bot/terragold_deposit",
                 ),
             ]),

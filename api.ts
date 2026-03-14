@@ -1,8 +1,8 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client";
 import { Telegraf } from "telegraf";
-import { MyContext } from "./types";
-import { Chat, User } from "telegraf/types";
+import type { MyContext } from "./types";
+import type { Chat, User } from "telegraf/types";
 
 const adapter = new PrismaPg({
     connectionString: process.env.DATABASE_URL!,
