@@ -43,16 +43,16 @@ app.post("/ton-webhook", async (req, res) => {
             console.log(hash, data.tx_hash);
             const msg = tx.inMessage;
 
-            const message = {
-                hash,
-                amount_ton: 1,
-                comment: 'user_id:1655456736',
-                amount_usdt: 1.3,
-                created_at: Date.now()
-            }
+            // const message = {
+            //     hash,
+            //     amount_ton: 1,
+            //     comment: 'user_id:1655456736',
+            //     amount_usdt: 1.3,
+            //     created_at: Date.now()
+            // }
 
-            sendToQueue(message)
-            break;
+            // sendToQueue(message)
+            // break;
 
             if (!msg) continue;
 
