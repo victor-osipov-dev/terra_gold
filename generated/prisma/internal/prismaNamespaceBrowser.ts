@@ -54,7 +54,8 @@ export const ModelName = {
   User: 'User',
   Chat: 'Chat',
   Resource: 'Resource',
-  UserChat: 'UserChat'
+  UserChat: 'UserChat',
+  TonTransaction: 'TonTransaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -119,6 +120,18 @@ export const UserChatScalarFieldEnum = {
 } as const
 
 export type UserChatScalarFieldEnum = (typeof UserChatScalarFieldEnum)[keyof typeof UserChatScalarFieldEnum]
+
+
+export const TonTransactionScalarFieldEnum = {
+  id: 'id',
+  tx_hash: 'tx_hash',
+  user_id: 'user_id',
+  amount: 'amount',
+  amount_usdt: 'amount_usdt',
+  created_at: 'created_at'
+} as const
+
+export type TonTransactionScalarFieldEnum = (typeof TonTransactionScalarFieldEnum)[keyof typeof TonTransactionScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,6 +1,7 @@
 import express from "express";
 import amqp from "amqplib";
 import { Address, TonClient, fromNano } from "ton";
+import { getTonPriceUSD } from "./libs";
 
 const queue = "ton_payments";
 const walletAddress = "UQCtuLgvIXZ8z2cEosLKxKHsiPgcrepaK-VnBPaFZhTI1NZL";
@@ -41,15 +42,16 @@ app.post("/ton-webhook", async (req, res) => {
             console.log(hash, data.tx_hash);
             const msg = tx.inMessage;
 
-            // const message = {
-            //     hash,
-            //     amount_ton: 1,
-            //     comment: 'user_id:1655456736',
-            //     created_at: Date.now()
-            // }
+            const message = {
+                hash,
+                amount_ton: 1,
+                comment: 'user_id:1655456736',
+                amount_usdt: 1.3,
+                created_at: Date.now()
+            }
 
-            // sendToQueue(message)
-            // break;
+            sendToQueue(message)
+            break;
 
             if (!msg) continue;
 
@@ -67,10 +69,12 @@ app.post("/ton-webhook", async (req, res) => {
                     if (op === 0) {
                         const comment = body.loadStringTail();
                         console.log("Comment:", comment);
+                        const ton_price_USD = await getTonPriceUSD();
 
                         const data = {
                             hash,
                             amount_ton: amountTon,
+                            amount_usdt: amountTon * ton_price_USD,
                             comment,
                             created_at: Date.now()
                         }

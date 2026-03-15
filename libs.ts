@@ -43,3 +43,10 @@ export function verifyTelegramInitData(initData: any) {
 
     return hmac === hash;
 }
+
+
+export async function getTonPriceUSD() {
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd");
+    const data = await res.json();
+    return data["the-open-network"].usd;
+}

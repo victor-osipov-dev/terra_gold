@@ -61,3 +61,8 @@ export type Resource = Prisma.ResourceModel
  * 
  */
 export type UserChat = Prisma.UserChatModel
+/**
+ * Model TonTransaction
+ * 
+ */
+export type TonTransaction = Prisma.TonTransactionModel

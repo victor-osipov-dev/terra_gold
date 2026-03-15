@@ -387,7 +387,8 @@ export const ModelName = {
   User: 'User',
   Chat: 'Chat',
   Resource: 'Resource',
-  UserChat: 'UserChat'
+  UserChat: 'UserChat',
+  TonTransaction: 'TonTransaction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "chat" | "resource" | "userChat"
+    modelProps: "user" | "chat" | "resource" | "userChat" | "tonTransaction"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TonTransaction: {
+      payload: Prisma.$TonTransactionPayload<ExtArgs>
+      fields: Prisma.TonTransactionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TonTransactionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TonTransactionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>
+        }
+        findFirst: {
+          args: Prisma.TonTransactionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TonTransactionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>
+        }
+        findMany: {
+          args: Prisma.TonTransactionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>[]
+        }
+        create: {
+          args: Prisma.TonTransactionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>
+        }
+        createMany: {
+          args: Prisma.TonTransactionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TonTransactionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>[]
+        }
+        delete: {
+          args: Prisma.TonTransactionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>
+        }
+        update: {
+          args: Prisma.TonTransactionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>
+        }
+        deleteMany: {
+          args: Prisma.TonTransactionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TonTransactionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TonTransactionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>[]
+        }
+        upsert: {
+          args: Prisma.TonTransactionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TonTransactionPayload>
+        }
+        aggregate: {
+          args: Prisma.TonTransactionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTonTransaction>
+        }
+        groupBy: {
+          args: Prisma.TonTransactionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TonTransactionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TonTransactionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TonTransactionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -788,6 +863,18 @@ export const UserChatScalarFieldEnum = {
 } as const
 
 export type UserChatScalarFieldEnum = (typeof UserChatScalarFieldEnum)[keyof typeof UserChatScalarFieldEnum]
+
+
+export const TonTransactionScalarFieldEnum = {
+  id: 'id',
+  tx_hash: 'tx_hash',
+  user_id: 'user_id',
+  amount: 'amount',
+  amount_usdt: 'amount_usdt',
+  created_at: 'created_at'
+} as const
+
+export type TonTransactionScalarFieldEnum = (typeof TonTransactionScalarFieldEnum)[keyof typeof TonTransactionScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -994,6 +1081,7 @@ export type GlobalOmitConfig = {
   chat?: Prisma.ChatOmit
   resource?: Prisma.ResourceOmit
   userChat?: Prisma.UserChatOmit
+  tonTransaction?: Prisma.TonTransactionOmit
 }
 
 /* Types for Logging */

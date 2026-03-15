@@ -3,9 +3,12 @@ import { computed, ref, watchEffect } from "vue";
 import { NCard, NButton, NSpace, NDivider, NTag, NInputNumber } from "naive-ui";
 import { connectTON } from "../api";
 import { useRouter } from "vue-router";
+import { useUser } from "../shared/composables/user";
+// import { beginCell } from "ton-core";
 
 const router = useRouter()
 const { tonConnectUI, connectedWallet } = connectTON()
+const { data: user, isLoading, error } = useUser();
 
 const walletConnected = computed(() => !!connectedWallet.value)
 const selectedAmount = ref(1);
@@ -32,12 +35,21 @@ async function deposit() {
 
     const amountNano = selectedAmount.value * 1e9;
 
+    // const payload = beginCell()
+    //     .storeUint(0, 32)       // optional op code
+    //     .storeStringTail("user_id:" + user.id)
+    //     .endCell()
+    //     .toBoc()
+    //     .toString("base64");
+    const payload = btoa("user_id:" + user.id);
+
     const tx = {
         validUntil: Math.floor(Date.now() / 1000) + 600,
         messages: [
             {
                 address: merchantAddress,
-                amount: amountNano.toString()
+                amount: amountNano.toString(),
+                payload
             }
         ]
     };

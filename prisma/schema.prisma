@@ -57,3 +57,12 @@ model UserChat {
 
   @@id([user_id, chat_id]) // составной первичный ключ
 }
+
+model TonTransaction {
+  id             String   @id @default(cuid())      // внутренний ID в базе
+  tx_hash         String   @unique                  // хэш транзакции в блокчейне TON
+  user_id       BigInt
+  amount         Decimal  @db.Decimal(10, 3)                             
+  amount_usdt    Decimal  @db.Decimal(10, 3)
+  created_at      DateTime @default(now())            // запись в базу
+}
