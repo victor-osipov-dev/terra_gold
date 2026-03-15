@@ -33,10 +33,8 @@ async function consume() {
             const data: IMessage = JSON.parse(msg.content.toString());
 
             console.log("Received:", data);
-            const comment = Buffer.from(data.comment, "base64").toString("utf-8");
-            console.log(comment);
 
-            const arr_data = comment.split(':');
+            const arr_data = data.comment.split(':');
 
             console.log(123, arr_data);
 
