@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import amqp from "amqplib";
 import { Address, TonClient, fromNano } from "ton";
@@ -92,4 +93,4 @@ app.post("/ton-webhook", async (req, res) => {
     res.sendStatus(200);
 });
 
-app.listen(5001, () => console.log("Webhook server running on port 5001"));
+app.listen(process.env.TON_WEBHOOK_PORT, () => console.log("Webhook server running on port " + process.env.TON_WEBHOOK_PORT));
