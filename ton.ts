@@ -44,7 +44,7 @@ app.post("/ton-webhook", async (req, res) => {
             // const message = {
             //     hash,
             //     amount_ton: 1,
-            //     comment: 'user_id:103023909043',
+            //     comment: 'user_id:1655456736',
             //     created_at: Date.now()
             // }
 

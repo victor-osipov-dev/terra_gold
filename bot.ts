@@ -6,6 +6,7 @@ import hearAllCommands from "./middleware/hear_all_commands";
 import hearAllMessages from "./middleware/hear_all_messages";
 import { session } from "telegraf";
 import { app } from "./server";
+import './transaction_processing'
 
 bot.use(session());
 await hearAllCommands(bot);
