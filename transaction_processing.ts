@@ -3,6 +3,8 @@ import * as amqp from "amqplib";
 import { prisma } from "./api";
 
 const queue = "ton_payments";
+const queue_duplicates = "ton_payments_duplicates";
+const queue_others = "ton_payments_others";
 
 type IMessage = {
     hash: string,
@@ -17,9 +19,11 @@ type IMessage = {
 async function consume() {
     try {
         const connection = await amqp.connect(`amqp://${process.env.RABBITMQ_USER}:${encodeURIComponent(process.env.RABBITMQ_PASSWORD ?? '')}@${process.env.RABBITMQ_IP}:5672`);
+        
         const channel = await connection.createChannel();
-
         await channel.assertQueue(queue, { durable: true });
+        await channel.assertQueue(queue_duplicates, { durable: true });
+        await channel.assertQueue(queue_others, { durable: true });
 
         channel.consume(queue, async (msg: any) => {
             if (!msg) return;
@@ -70,8 +74,18 @@ async function consume() {
 
                     channel.ack(msg);
                 } else {
+                    channel.sendToQueue(
+                        queue_duplicates,
+                        Buffer.from(msg.content)
+                    );
                     channel.ack(msg);
                 }
+            } else {
+                channel.sendToQueue(
+                    queue_others,
+                    Buffer.from(msg.content)
+                );
+                channel.ack(msg);
             }
 
         });
