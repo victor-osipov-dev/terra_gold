@@ -30,10 +30,25 @@ async function sendToQueue(data: any) {
     console.log("Message sent:", data);
 }
 
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 app.post("/ton-webhook", async (req, res) => {
     const data = req.body;
     const transactions = await client.getTransactions(Address.parse(walletAddress), { limit: 10 });
-    console.log(Address.parse(walletAddress));
+
+    for (let i = 0; i < 5; i++) {
+        try {
+            var ton_price_USD = await getTonPriceUSD();
+            console.log("Цена TON:", ton_price_USD);
+            break;
+        } catch (err) {
+            console.error("Ошибка получения курса, пробуем снова", i + 1);
+            await delay(500)
+        }
+    }
 
 
     for (let tx of transactions) {
@@ -42,17 +57,6 @@ app.post("/ton-webhook", async (req, res) => {
         if (hash === data.tx_hash) {
             console.log(hash, data.tx_hash);
             const msg = tx.inMessage;
-
-            // const message = {
-            //     hash,
-            //     amount_ton: 1,
-            //     comment: 'user_id:1655456736',
-            //     amount_usdt: 1.3,
-            //     created_at: Date.now()
-            // }
-
-            // sendToQueue(message)
-            // break;
 
             if (!msg) continue;
 
@@ -70,7 +74,7 @@ app.post("/ton-webhook", async (req, res) => {
                     if (op === 0) {
                         const comment = body.loadStringTail();
                         console.log("Comment:", comment);
-                        const ton_price_USD = await getTonPriceUSD();
+
 
                         const data = {
                             hash,
