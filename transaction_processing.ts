@@ -1,7 +1,6 @@
 import "dotenv/config";
-import amqp from "amqplib";
+import * as amqp from "amqplib";
 import { prisma } from "./api";
-import { getTonPriceUSD } from "./libs";
 
 const queue = "ton_payments";
 
@@ -17,69 +16,68 @@ type IMessage = {
 
 async function consume() {
     try {
-        var connection = await amqp.connect(`amqp://${process.env.RABBITMQ_USER}:${encodeURIComponent(process.env.RABBITMQ_PASSWORD)}@${process.env.RABBITMQ_IP}:5672`);
-        var channel = await connection.createChannel();
-    } catch (err) {
-        console.log('RabbitMQ err connection'); 
-    }
-    
+        const connection = await amqp.connect(`amqp://${process.env.RABBITMQ_USER}:${encodeURIComponent(process.env.RABBITMQ_PASSWORD ?? '')}@${process.env.RABBITMQ_IP}:5672`);
+        const channel = await connection.createChannel();
 
-    await channel.assertQueue(queue, { durable: true });
+        await channel.assertQueue(queue, { durable: true });
 
-    channel.consume(queue, async (msg: any) => {
-        if (!msg) return;
+        channel.consume(queue, async (msg: any) => {
+            if (!msg) return;
 
-        
 
-        const data: IMessage = JSON.parse(msg.content.toString());
 
-        console.log("Received:", data);
-        const comment = Buffer.from(data.comment, "base64").toString("utf-8");
-        console.log(comment);
-        
-        const arr_data = comment.split(':');
+            const data: IMessage = JSON.parse(msg.content.toString());
 
-        console.log(123, arr_data);
-        
-        if (arr_data[0] == 'user_id') {
-            console.log(321);
-            const user_id = arr_data[1] 
+            console.log("Received:", data);
+            const comment = Buffer.from(data.comment, "base64").toString("utf-8");
+            console.log(comment);
 
-            const tonTransaction = await prisma.tonTransaction.findUnique({
-                where: {
-                    tx_hash: data.hash
-                }
-            })
+            const arr_data = comment.split(':');
 
-            if (!tonTransaction) {
-                await prisma.tonTransaction.create({
-                    data: {
-                        tx_hash: data.hash,
-                        user_id: +user_id,
-                        amount: data.amount_ton,
-                        amount_usdt: data.amount_usdt
-                    }
-                });
+            console.log(123, arr_data);
 
-                await prisma.user.update({
+            if (arr_data[0] == 'user_id') {
+                console.log(321);
+                const user_id = arr_data[1]
+
+                const tonTransaction = await prisma.tonTransaction.findUnique({
                     where: {
-                        id: +user_id,
-                        // id: 1655456736
-                    },
-                    data: {
-                        balance: {
-                            increment: data.amount_usdt
-                        }
+                        tx_hash: data.hash
                     }
                 })
 
-                channel.ack(msg);
-            } else {
-                channel.ack(msg);
-            }
-        }
+                if (!tonTransaction) {
+                    await prisma.tonTransaction.create({
+                        data: {
+                            tx_hash: data.hash,
+                            user_id: +user_id,
+                            amount: data.amount_ton,
+                            amount_usdt: data.amount_usdt
+                        }
+                    });
 
-    });
+                    await prisma.user.update({
+                        where: {
+                            id: +user_id,
+                            // id: 1655456736
+                        },
+                        data: {
+                            balance: {
+                                increment: data.amount_usdt
+                            }
+                        }
+                    })
+
+                    channel.ack(msg);
+                } else {
+                    channel.ack(msg);
+                }
+            }
+
+        });
+    } catch (err) {
+        console.log('RabbitMQ err connection', err);
+    }
 }
 
 consume();
