@@ -1,3 +1,4 @@
+import "dotenv/config";
 import amqp from "amqplib";
 import { prisma } from "./api";
 
@@ -12,13 +13,20 @@ type IMessage = {
 }
 
 async function consume() {
-    const connection = await amqp.connect("amqp://localhost:5672");
-    const channel = await connection.createChannel();
+    try {
+        var connection = await amqp.connect(`amqp://${process.env.RABBITMQ_USER}:${encodeURIComponent(process.env.RABBITMQ_PASSWORD)}@${process.env.RABBITMQ_IP}:5672`);
+        var channel = await connection.createChannel();
+    } catch (err) {
+        console.log('RabbitMQ err connection'); 
+    }
+    
 
     await channel.assertQueue(queue, { durable: true });
 
     channel.consume(queue, async (msg: any) => {
         if (!msg) return;
+
+        
 
         const data: IMessage = JSON.parse(msg.content.toString());
 
