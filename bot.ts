@@ -16,7 +16,7 @@ await hearAllMessages(bot);
 bot.launch();
 console.log("Bot started");
 app.listen(8001, "0.0.0.0", () => {
-    console.log("Listen 8000");
+    console.log("Listen 8001");
 });
 
 // корректное завершение

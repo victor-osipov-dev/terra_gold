@@ -5,6 +5,8 @@ import { connectTON } from "../api";
 import { useRouter } from "vue-router";
 import { useUser } from "../shared/composables/user";
 // import { beginCell } from "ton-core";
+// import { beginCell } from "@ton/core";
+import { useQuery } from "@tanstack/vue-query";
 
 const router = useRouter()
 const { tonConnectUI, connectedWallet } = connectTON()
@@ -17,6 +19,24 @@ const amounts = [1, 5, 10, 25, 50];
 
 const merchantAddress = "UQCtuLgvIXZ8z2cEosLKxKHsiPgcrepaK-VnBPaFZhTI1NZL"; // адрес для пополнения
 
+const value = ref(1)
+watchEffect(() => {
+    selectAmount(value.value)
+})
+
+const { data: payload, isLoading: isLoadingPayload } = useQuery({
+    queryKey: [value],
+    queryFn: async () => {
+        const res = await fetch("https://ai-box-cars.ru:8000/create-ton-payload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ comment: 'user_id:' + user.value.id }),
+        });
+        if (!res.ok) throw new Error("Ошибка запроса");
+        const json = await res.json();
+        return json.payload;
+    }
+})
 
 
 function selectAmount(amount) {
@@ -35,37 +55,27 @@ async function deposit() {
 
     const amountNano = selectedAmount.value * 1e9;
 
-    // const payload = beginCell()
-    //     .storeUint(0, 32)       // optional op code
-    //     .storeStringTail("user_id:" + user.id)
-    //     .endCell()
-    //     .toBoc()
-    //     .toString("base64");
-    const payload = btoa("user_id:" + user.id);
+    
 
     const tx = {
         validUntil: Math.floor(Date.now() / 1000) + 600,
         messages: [
             {
                 address: merchantAddress,
-                amount: amountNano.toString(),
-                payload
+                amount: amountNano.toString(),  
+                payload: payload.value 
             }
         ]
     };
 
     try {
         const response = await tonConnectUI.sendTransaction(tx);
-        
     } catch (e) {
         console.error("Transaction failed", e);
     }
 }
 
-const value = ref(1)
-watchEffect(() => {
-    selectAmount(value.value)
-})
+
 </script>
 
 <template>
