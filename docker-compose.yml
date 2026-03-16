@@ -25,7 +25,6 @@ services:
         restart: always
         ports:
             - "443:443" # Telegram Mini Apps
-            - "80:80" # редирект HTTP → HTTPS
             - "8080:8080" # Админ панель базы данных
             - "8000:8000" # API
             - "5000:5000" # API

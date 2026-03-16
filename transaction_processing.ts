@@ -1,6 +1,6 @@
 import "dotenv/config";
 import * as amqp from "amqplib";
-import { prisma } from "./api";
+import { bot, prisma } from "./api";
 
 const queue = "ton_payments";
 const queue_duplicates = "ton_payments_duplicates";
@@ -63,7 +63,6 @@ async function consume() {
                     await prisma.user.update({
                         where: {
                             id: +user_id,
-                            // id: 1655456736
                         },
                         data: {
                             balance: {
@@ -71,6 +70,7 @@ async function consume() {
                             }
                         }
                     })
+                    await bot.telegram.sendMessage(user_id, `✅ Платеж получен (${data.amount_usdt} USDT)`);
 
                     channel.ack(msg);
                 } else {
