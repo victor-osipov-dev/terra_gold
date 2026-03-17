@@ -242,6 +242,7 @@ export type UserWhereInput = {
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   userChats?: Prisma.UserChatActivityListRelationFilter
   withdrawals?: Prisma.WithdrawalRequestListRelationFilter
+  orders?: Prisma.MarketListingListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -254,6 +255,7 @@ export type UserOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   userChats?: Prisma.UserChatActivityOrderByRelationAggregateInput
   withdrawals?: Prisma.WithdrawalRequestOrderByRelationAggregateInput
+  orders?: Prisma.MarketListingOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -269,6 +271,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   userChats?: Prisma.UserChatActivityListRelationFilter
   withdrawals?: Prisma.WithdrawalRequestListRelationFilter
+  orders?: Prisma.MarketListingListRelationFilter
 }, "id" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -309,6 +312,7 @@ export type UserCreateInput = {
   created_at?: Date | string
   userChats?: Prisma.UserChatActivityCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalRequestCreateNestedManyWithoutUserInput
+  orders?: Prisma.MarketListingCreateNestedManyWithoutSellerInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -321,6 +325,7 @@ export type UserUncheckedCreateInput = {
   created_at?: Date | string
   userChats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.MarketListingUncheckedCreateNestedManyWithoutSellerInput
 }
 
 export type UserUpdateInput = {
@@ -333,6 +338,7 @@ export type UserUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userChats?: Prisma.UserChatActivityUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalRequestUpdateManyWithoutUserNestedInput
+  orders?: Prisma.MarketListingUpdateManyWithoutSellerNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -345,6 +351,7 @@ export type UserUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userChats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.MarketListingUncheckedUpdateManyWithoutSellerNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -476,6 +483,20 @@ export type UserUpdateOneRequiredWithoutWithdrawalsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutWithdrawalsInput, Prisma.UserUpdateWithoutWithdrawalsInput>, Prisma.UserUncheckedUpdateWithoutWithdrawalsInput>
 }
 
+export type UserCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.UserUpsertWithoutOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdersInput, Prisma.UserUpdateWithoutOrdersInput>, Prisma.UserUncheckedUpdateWithoutOrdersInput>
+}
+
 export type UserCreateWithoutUserChatsInput = {
   id?: bigint | number
   first_name: string
@@ -485,6 +506,7 @@ export type UserCreateWithoutUserChatsInput = {
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   withdrawals?: Prisma.WithdrawalRequestCreateNestedManyWithoutUserInput
+  orders?: Prisma.MarketListingCreateNestedManyWithoutSellerInput
 }
 
 export type UserUncheckedCreateWithoutUserChatsInput = {
@@ -496,6 +518,7 @@ export type UserUncheckedCreateWithoutUserChatsInput = {
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   withdrawals?: Prisma.WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.MarketListingUncheckedCreateNestedManyWithoutSellerInput
 }
 
 export type UserCreateOrConnectWithoutUserChatsInput = {
@@ -523,6 +546,7 @@ export type UserUpdateWithoutUserChatsInput = {
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   withdrawals?: Prisma.WithdrawalRequestUpdateManyWithoutUserNestedInput
+  orders?: Prisma.MarketListingUpdateManyWithoutSellerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserChatsInput = {
@@ -534,6 +558,7 @@ export type UserUncheckedUpdateWithoutUserChatsInput = {
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   withdrawals?: Prisma.WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.MarketListingUncheckedUpdateManyWithoutSellerNestedInput
 }
 
 export type UserCreateWithoutWithdrawalsInput = {
@@ -545,6 +570,7 @@ export type UserCreateWithoutWithdrawalsInput = {
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   userChats?: Prisma.UserChatActivityCreateNestedManyWithoutUserInput
+  orders?: Prisma.MarketListingCreateNestedManyWithoutSellerInput
 }
 
 export type UserUncheckedCreateWithoutWithdrawalsInput = {
@@ -556,6 +582,7 @@ export type UserUncheckedCreateWithoutWithdrawalsInput = {
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   userChats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.MarketListingUncheckedCreateNestedManyWithoutSellerInput
 }
 
 export type UserCreateOrConnectWithoutWithdrawalsInput = {
@@ -583,6 +610,7 @@ export type UserUpdateWithoutWithdrawalsInput = {
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userChats?: Prisma.UserChatActivityUpdateManyWithoutUserNestedInput
+  orders?: Prisma.MarketListingUpdateManyWithoutSellerNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWithdrawalsInput = {
@@ -594,6 +622,71 @@ export type UserUncheckedUpdateWithoutWithdrawalsInput = {
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userChats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.MarketListingUncheckedUpdateManyWithoutSellerNestedInput
+}
+
+export type UserCreateWithoutOrdersInput = {
+  id?: bigint | number
+  first_name: string
+  last_name: string
+  username: string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+  userChats?: Prisma.UserChatActivityCreateNestedManyWithoutUserInput
+  withdrawals?: Prisma.WithdrawalRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutOrdersInput = {
+  id?: bigint | number
+  first_name: string
+  last_name: string
+  username: string
+  balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Date | string
+  userChats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutUserInput
+  withdrawals?: Prisma.WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+}
+
+export type UserUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrdersInput, Prisma.UserUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrdersInput, Prisma.UserUncheckedUpdateWithoutOrdersInput>
+}
+
+export type UserUpdateWithoutOrdersInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  first_name?: Prisma.StringFieldUpdateOperationsInput | string
+  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userChats?: Prisma.UserChatActivityUpdateManyWithoutUserNestedInput
+  withdrawals?: Prisma.WithdrawalRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  first_name?: Prisma.StringFieldUpdateOperationsInput | string
+  last_name?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userChats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutUserNestedInput
+  withdrawals?: Prisma.WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -604,11 +697,13 @@ export type UserUncheckedUpdateWithoutWithdrawalsInput = {
 export type UserCountOutputType = {
   userChats: number
   withdrawals: number
+  orders: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userChats?: boolean | UserCountOutputTypeCountUserChatsArgs
   withdrawals?: boolean | UserCountOutputTypeCountWithdrawalsArgs
+  orders?: boolean | UserCountOutputTypeCountOrdersArgs
 }
 
 /**
@@ -635,6 +730,13 @@ export type UserCountOutputTypeCountWithdrawalsArgs<ExtArgs extends runtime.Type
   where?: Prisma.WithdrawalRequestWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketListingWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -646,6 +748,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   created_at?: boolean
   userChats?: boolean | Prisma.User$userChatsArgs<ExtArgs>
   withdrawals?: boolean | Prisma.User$withdrawalsArgs<ExtArgs>
+  orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -683,6 +786,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userChats?: boolean | Prisma.User$userChatsArgs<ExtArgs>
   withdrawals?: boolean | Prisma.User$withdrawalsArgs<ExtArgs>
+  orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -693,6 +797,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     userChats: Prisma.$UserChatActivityPayload<ExtArgs>[]
     withdrawals: Prisma.$WithdrawalRequestPayload<ExtArgs>[]
+    orders: Prisma.$MarketListingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1098,6 +1203,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   userChats<T extends Prisma.User$userChatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userChatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChatActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   withdrawals<T extends Prisma.User$withdrawalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WithdrawalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1572,6 +1678,30 @@ export type User$withdrawalsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.WithdrawalRequestScalarFieldEnum | Prisma.WithdrawalRequestScalarFieldEnum[]
+}
+
+/**
+ * User.orders
+ */
+export type User$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketListing
+   */
+  select?: Prisma.MarketListingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketListing
+   */
+  omit?: Prisma.MarketListingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketListingInclude<ExtArgs> | null
+  where?: Prisma.MarketListingWhereInput
+  orderBy?: Prisma.MarketListingOrderByWithRelationInput | Prisma.MarketListingOrderByWithRelationInput[]
+  cursor?: Prisma.MarketListingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketListingScalarFieldEnum | Prisma.MarketListingScalarFieldEnum[]
 }
 
 /**

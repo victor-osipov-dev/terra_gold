@@ -56,7 +56,8 @@ export const ModelName = {
   Resource: 'Resource',
   UserChatActivity: 'UserChatActivity',
   TonTransaction: 'TonTransaction',
-  WithdrawalRequest: 'WithdrawalRequest'
+  WithdrawalRequest: 'WithdrawalRequest',
+  MarketListing: 'MarketListing'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -147,6 +148,19 @@ export const WithdrawalRequestScalarFieldEnum = {
 } as const
 
 export type WithdrawalRequestScalarFieldEnum = (typeof WithdrawalRequestScalarFieldEnum)[keyof typeof WithdrawalRequestScalarFieldEnum]
+
+
+export const MarketListingScalarFieldEnum = {
+  id: 'id',
+  seller_id: 'seller_id',
+  chat_id: 'chat_id',
+  resource: 'resource',
+  amount: 'amount',
+  price_usdt: 'price_usdt',
+  created_at: 'created_at'
+} as const
+
+export type MarketListingScalarFieldEnum = (typeof MarketListingScalarFieldEnum)[keyof typeof MarketListingScalarFieldEnum]
 
 
 export const SortOrder = {

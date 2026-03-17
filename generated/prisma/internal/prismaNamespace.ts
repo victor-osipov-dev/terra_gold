@@ -389,7 +389,8 @@ export const ModelName = {
   Resource: 'Resource',
   UserChatActivity: 'UserChatActivity',
   TonTransaction: 'TonTransaction',
-  WithdrawalRequest: 'WithdrawalRequest'
+  WithdrawalRequest: 'WithdrawalRequest',
+  MarketListing: 'MarketListing'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "chat" | "resource" | "userChatActivity" | "tonTransaction" | "withdrawalRequest"
+    modelProps: "user" | "chat" | "resource" | "userChatActivity" | "tonTransaction" | "withdrawalRequest" | "marketListing"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +854,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MarketListing: {
+      payload: Prisma.$MarketListingPayload<ExtArgs>
+      fields: Prisma.MarketListingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MarketListingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MarketListingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>
+        }
+        findFirst: {
+          args: Prisma.MarketListingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MarketListingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>
+        }
+        findMany: {
+          args: Prisma.MarketListingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>[]
+        }
+        create: {
+          args: Prisma.MarketListingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>
+        }
+        createMany: {
+          args: Prisma.MarketListingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MarketListingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>[]
+        }
+        delete: {
+          args: Prisma.MarketListingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>
+        }
+        update: {
+          args: Prisma.MarketListingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>
+        }
+        deleteMany: {
+          args: Prisma.MarketListingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MarketListingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MarketListingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>[]
+        }
+        upsert: {
+          args: Prisma.MarketListingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MarketListingPayload>
+        }
+        aggregate: {
+          args: Prisma.MarketListingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMarketListing>
+        }
+        groupBy: {
+          args: Prisma.MarketListingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MarketListingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MarketListingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MarketListingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -964,6 +1039,19 @@ export const WithdrawalRequestScalarFieldEnum = {
 } as const
 
 export type WithdrawalRequestScalarFieldEnum = (typeof WithdrawalRequestScalarFieldEnum)[keyof typeof WithdrawalRequestScalarFieldEnum]
+
+
+export const MarketListingScalarFieldEnum = {
+  id: 'id',
+  seller_id: 'seller_id',
+  chat_id: 'chat_id',
+  resource: 'resource',
+  amount: 'amount',
+  price_usdt: 'price_usdt',
+  created_at: 'created_at'
+} as const
+
+export type MarketListingScalarFieldEnum = (typeof MarketListingScalarFieldEnum)[keyof typeof MarketListingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1194,6 +1282,7 @@ export type GlobalOmitConfig = {
   userChatActivity?: Prisma.UserChatActivityOmit
   tonTransaction?: Prisma.TonTransactionOmit
   withdrawalRequest?: Prisma.WithdrawalRequestOmit
+  marketListing?: Prisma.MarketListingOmit
 }
 
 /* Types for Logging */

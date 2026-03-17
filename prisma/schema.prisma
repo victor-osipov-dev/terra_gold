@@ -20,6 +20,7 @@ model User {
 
   userChats  UserChatActivity[]
   withdrawals WithdrawalRequest[]
+  orders MarketListing[]
 }
 
 model Chat {
@@ -36,7 +37,8 @@ model Chat {
 
   created_at DateTime    @default(now())
 
-  user_chats  UserChatActivity[]  // связь с промежуточной таблицей
+  user_chats  UserChatActivity[]  // связь с промежуточной таблицей\
+  orders MarketListing[]
 }
 
 model Resource {
@@ -88,4 +90,17 @@ enum WithdrawalStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+model MarketListing {
+  id          BigInt     @id @default(autoincrement())
+  seller_id   BigInt
+  chat_id     BigInt
+  resource    String     // food | materials | tools
+  amount      Int
+  price_usdt  Decimal    @db.Decimal(10,3)
+  created_at  DateTime   @default(now())
+
+  seller      User       @relation(fields: [seller_id], references: [id])
+  chat        Chat       @relation(fields: [chat_id], references: [id])
 }

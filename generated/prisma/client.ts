@@ -71,3 +71,8 @@ export type TonTransaction = Prisma.TonTransactionModel
  * 
  */
 export type WithdrawalRequest = Prisma.WithdrawalRequestModel
+/**
+ * Model MarketListing
+ * 
+ */
+export type MarketListing = Prisma.MarketListingModel

@@ -274,6 +274,7 @@ export type ChatWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
   resource?: Prisma.XOR<Prisma.ResourceScalarRelationFilter, Prisma.ResourceWhereInput>
   user_chats?: Prisma.UserChatActivityListRelationFilter
+  orders?: Prisma.MarketListingListRelationFilter
 }
 
 export type ChatOrderByWithRelationInput = {
@@ -288,6 +289,7 @@ export type ChatOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   resource?: Prisma.ResourceOrderByWithRelationInput
   user_chats?: Prisma.UserChatActivityOrderByRelationAggregateInput
+  orders?: Prisma.MarketListingOrderByRelationAggregateInput
 }
 
 export type ChatWhereUniqueInput = Prisma.AtLeast<{
@@ -305,6 +307,7 @@ export type ChatWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"Chat"> | Date | string
   resource?: Prisma.XOR<Prisma.ResourceScalarRelationFilter, Prisma.ResourceWhereInput>
   user_chats?: Prisma.UserChatActivityListRelationFilter
+  orders?: Prisma.MarketListingListRelationFilter
 }, "id">
 
 export type ChatOrderByWithAggregationInput = {
@@ -350,6 +353,7 @@ export type ChatCreateInput = {
   created_at?: Date | string
   resource?: Prisma.ResourceCreateNestedOneWithoutChatsInput
   user_chats?: Prisma.UserChatActivityCreateNestedManyWithoutChatInput
+  orders?: Prisma.MarketListingCreateNestedManyWithoutChatInput
 }
 
 export type ChatUncheckedCreateInput = {
@@ -363,6 +367,7 @@ export type ChatUncheckedCreateInput = {
   resource_id?: bigint | number
   created_at?: Date | string
   user_chats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutChatInput
+  orders?: Prisma.MarketListingUncheckedCreateNestedManyWithoutChatInput
 }
 
 export type ChatUpdateInput = {
@@ -376,6 +381,7 @@ export type ChatUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resource?: Prisma.ResourceUpdateOneRequiredWithoutChatsNestedInput
   user_chats?: Prisma.UserChatActivityUpdateManyWithoutChatNestedInput
+  orders?: Prisma.MarketListingUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateInput = {
@@ -389,6 +395,7 @@ export type ChatUncheckedUpdateInput = {
   resource_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user_chats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutChatNestedInput
+  orders?: Prisma.MarketListingUncheckedUpdateManyWithoutChatNestedInput
 }
 
 export type ChatCreateManyInput = {
@@ -561,6 +568,20 @@ export type ChatUpdateOneRequiredWithoutUser_chatsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChatUpdateToOneWithWhereWithoutUser_chatsInput, Prisma.ChatUpdateWithoutUser_chatsInput>, Prisma.ChatUncheckedUpdateWithoutUser_chatsInput>
 }
 
+export type ChatCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutOrdersInput, Prisma.ChatUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.ChatWhereUniqueInput
+}
+
+export type ChatUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.ChatCreateWithoutOrdersInput, Prisma.ChatUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.ChatCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.ChatUpsertWithoutOrdersInput
+  connect?: Prisma.ChatWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChatUpdateToOneWithWhereWithoutOrdersInput, Prisma.ChatUpdateWithoutOrdersInput>, Prisma.ChatUncheckedUpdateWithoutOrdersInput>
+}
+
 export type ChatCreateWithoutResourceInput = {
   id?: bigint | number
   title: string
@@ -571,6 +592,7 @@ export type ChatCreateWithoutResourceInput = {
   level_workers?: number
   created_at?: Date | string
   user_chats?: Prisma.UserChatActivityCreateNestedManyWithoutChatInput
+  orders?: Prisma.MarketListingCreateNestedManyWithoutChatInput
 }
 
 export type ChatUncheckedCreateWithoutResourceInput = {
@@ -583,6 +605,7 @@ export type ChatUncheckedCreateWithoutResourceInput = {
   level_workers?: number
   created_at?: Date | string
   user_chats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutChatInput
+  orders?: Prisma.MarketListingUncheckedCreateNestedManyWithoutChatInput
 }
 
 export type ChatCreateOrConnectWithoutResourceInput = {
@@ -636,6 +659,7 @@ export type ChatCreateWithoutUser_chatsInput = {
   level_workers?: number
   created_at?: Date | string
   resource?: Prisma.ResourceCreateNestedOneWithoutChatsInput
+  orders?: Prisma.MarketListingCreateNestedManyWithoutChatInput
 }
 
 export type ChatUncheckedCreateWithoutUser_chatsInput = {
@@ -648,6 +672,7 @@ export type ChatUncheckedCreateWithoutUser_chatsInput = {
   level_workers?: number
   resource_id?: bigint | number
   created_at?: Date | string
+  orders?: Prisma.MarketListingUncheckedCreateNestedManyWithoutChatInput
 }
 
 export type ChatCreateOrConnectWithoutUser_chatsInput = {
@@ -676,6 +701,7 @@ export type ChatUpdateWithoutUser_chatsInput = {
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   resource?: Prisma.ResourceUpdateOneRequiredWithoutChatsNestedInput
+  orders?: Prisma.MarketListingUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutUser_chatsInput = {
@@ -688,6 +714,75 @@ export type ChatUncheckedUpdateWithoutUser_chatsInput = {
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   resource_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.MarketListingUncheckedUpdateManyWithoutChatNestedInput
+}
+
+export type ChatCreateWithoutOrdersInput = {
+  id?: bigint | number
+  title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  tools?: number
+  level_workers?: number
+  created_at?: Date | string
+  resource?: Prisma.ResourceCreateNestedOneWithoutChatsInput
+  user_chats?: Prisma.UserChatActivityCreateNestedManyWithoutChatInput
+}
+
+export type ChatUncheckedCreateWithoutOrdersInput = {
+  id?: bigint | number
+  title: string
+  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: number
+  materials?: number
+  tools?: number
+  level_workers?: number
+  resource_id?: bigint | number
+  created_at?: Date | string
+  user_chats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutChatInput
+}
+
+export type ChatCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.ChatWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChatCreateWithoutOrdersInput, Prisma.ChatUncheckedCreateWithoutOrdersInput>
+}
+
+export type ChatUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.ChatUpdateWithoutOrdersInput, Prisma.ChatUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.ChatCreateWithoutOrdersInput, Prisma.ChatUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.ChatWhereInput
+}
+
+export type ChatUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.ChatWhereInput
+  data: Prisma.XOR<Prisma.ChatUpdateWithoutOrdersInput, Prisma.ChatUncheckedUpdateWithoutOrdersInput>
+}
+
+export type ChatUpdateWithoutOrdersInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  tools?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  resource?: Prisma.ResourceUpdateOneRequiredWithoutChatsNestedInput
+  user_chats?: Prisma.UserChatActivityUpdateManyWithoutChatNestedInput
+}
+
+export type ChatUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  budget?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  food?: Prisma.IntFieldUpdateOperationsInput | number
+  materials?: Prisma.IntFieldUpdateOperationsInput | number
+  tools?: Prisma.IntFieldUpdateOperationsInput | number
+  level_workers?: Prisma.IntFieldUpdateOperationsInput | number
+  resource_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_chats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutChatNestedInput
 }
 
 export type ChatCreateManyResourceInput = {
@@ -711,6 +806,7 @@ export type ChatUpdateWithoutResourceInput = {
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user_chats?: Prisma.UserChatActivityUpdateManyWithoutChatNestedInput
+  orders?: Prisma.MarketListingUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateWithoutResourceInput = {
@@ -723,6 +819,7 @@ export type ChatUncheckedUpdateWithoutResourceInput = {
   level_workers?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user_chats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutChatNestedInput
+  orders?: Prisma.MarketListingUncheckedUpdateManyWithoutChatNestedInput
 }
 
 export type ChatUncheckedUpdateManyWithoutResourceInput = {
@@ -743,10 +840,12 @@ export type ChatUncheckedUpdateManyWithoutResourceInput = {
 
 export type ChatCountOutputType = {
   user_chats: number
+  orders: number
 }
 
 export type ChatCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user_chats?: boolean | ChatCountOutputTypeCountUser_chatsArgs
+  orders?: boolean | ChatCountOutputTypeCountOrdersArgs
 }
 
 /**
@@ -766,6 +865,13 @@ export type ChatCountOutputTypeCountUser_chatsArgs<ExtArgs extends runtime.Types
   where?: Prisma.UserChatActivityWhereInput
 }
 
+/**
+ * ChatCountOutputType without action
+ */
+export type ChatCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MarketListingWhereInput
+}
+
 
 export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -779,6 +885,7 @@ export type ChatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   created_at?: boolean
   resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
   user_chats?: boolean | Prisma.Chat$user_chatsArgs<ExtArgs>
+  orders?: boolean | Prisma.Chat$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["chat"]>
 
@@ -824,6 +931,7 @@ export type ChatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type ChatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resource?: boolean | Prisma.ResourceDefaultArgs<ExtArgs>
   user_chats?: boolean | Prisma.Chat$user_chatsArgs<ExtArgs>
+  orders?: boolean | Prisma.Chat$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.ChatCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChatIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -838,6 +946,7 @@ export type $ChatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     resource: Prisma.$ResourcePayload<ExtArgs>
     user_chats: Prisma.$UserChatActivityPayload<ExtArgs>[]
+    orders: Prisma.$MarketListingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1245,6 +1354,7 @@ export interface Prisma__ChatClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   resource<T extends Prisma.ResourceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResourceDefaultArgs<ExtArgs>>): Prisma.Prisma__ResourceClient<runtime.Types.Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user_chats<T extends Prisma.Chat$user_chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$user_chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChatActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.Chat$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Chat$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MarketListingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1705,6 +1815,30 @@ export type Chat$user_chatsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.UserChatActivityScalarFieldEnum | Prisma.UserChatActivityScalarFieldEnum[]
+}
+
+/**
+ * Chat.orders
+ */
+export type Chat$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MarketListing
+   */
+  select?: Prisma.MarketListingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MarketListing
+   */
+  omit?: Prisma.MarketListingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MarketListingInclude<ExtArgs> | null
+  where?: Prisma.MarketListingWhereInput
+  orderBy?: Prisma.MarketListingOrderByWithRelationInput | Prisma.MarketListingOrderByWithRelationInput[]
+  cursor?: Prisma.MarketListingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MarketListingScalarFieldEnum | Prisma.MarketListingScalarFieldEnum[]
 }
 
 /**
