@@ -66,3 +66,8 @@ export type UserChat = Prisma.UserChatModel
  * 
  */
 export type TonTransaction = Prisma.TonTransactionModel
+/**
+ * Model WithdrawalRequest
+ * 
+ */
+export type WithdrawalRequest = Prisma.WithdrawalRequestModel

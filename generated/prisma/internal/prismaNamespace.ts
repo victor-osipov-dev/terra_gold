@@ -388,7 +388,8 @@ export const ModelName = {
   Chat: 'Chat',
   Resource: 'Resource',
   UserChat: 'UserChat',
-  TonTransaction: 'TonTransaction'
+  TonTransaction: 'TonTransaction',
+  WithdrawalRequest: 'WithdrawalRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -404,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "chat" | "resource" | "userChat" | "tonTransaction"
+    modelProps: "user" | "chat" | "resource" | "userChat" | "tonTransaction" | "withdrawalRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -778,6 +779,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    WithdrawalRequest: {
+      payload: Prisma.$WithdrawalRequestPayload<ExtArgs>
+      fields: Prisma.WithdrawalRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WithdrawalRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WithdrawalRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.WithdrawalRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WithdrawalRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>
+        }
+        findMany: {
+          args: Prisma.WithdrawalRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>[]
+        }
+        create: {
+          args: Prisma.WithdrawalRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>
+        }
+        createMany: {
+          args: Prisma.WithdrawalRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WithdrawalRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.WithdrawalRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>
+        }
+        update: {
+          args: Prisma.WithdrawalRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.WithdrawalRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WithdrawalRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WithdrawalRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.WithdrawalRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WithdrawalRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.WithdrawalRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWithdrawalRequest>
+        }
+        groupBy: {
+          args: Prisma.WithdrawalRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WithdrawalRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WithdrawalRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WithdrawalRequestCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -822,7 +897,9 @@ export const UserScalarFieldEnum = {
   first_name: 'first_name',
   last_name: 'last_name',
   username: 'username',
+  telegram_id: 'telegram_id',
   balance: 'balance',
+  reserved_balance: 'reserved_balance',
   created_at: 'created_at'
 } as const
 
@@ -877,6 +954,19 @@ export const TonTransactionScalarFieldEnum = {
 export type TonTransactionScalarFieldEnum = (typeof TonTransactionScalarFieldEnum)[keyof typeof TonTransactionScalarFieldEnum]
 
 
+export const WithdrawalRequestScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  amount: 'amount',
+  wallet: 'wallet',
+  status: 'status',
+  created_at: 'created_at',
+  processed_at: 'processed_at'
+} as const
+
+export type WithdrawalRequestScalarFieldEnum = (typeof WithdrawalRequestScalarFieldEnum)[keyof typeof WithdrawalRequestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -891,6 +981,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
@@ -966,6 +1064,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'WithdrawalStatus'
+ */
+export type EnumWithdrawalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WithdrawalStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'WithdrawalStatus[]'
+ */
+export type ListEnumWithdrawalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WithdrawalStatus[]'>
     
 
 
@@ -1082,6 +1194,7 @@ export type GlobalOmitConfig = {
   resource?: Prisma.ResourceOmit
   userChat?: Prisma.UserChatOmit
   tonTransaction?: Prisma.TonTransactionOmit
+  withdrawalRequest?: Prisma.WithdrawalRequestOmit
 }
 
 /* Types for Logging */

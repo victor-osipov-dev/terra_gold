@@ -55,7 +55,8 @@ export const ModelName = {
   Chat: 'Chat',
   Resource: 'Resource',
   UserChat: 'UserChat',
-  TonTransaction: 'TonTransaction'
+  TonTransaction: 'TonTransaction',
+  WithdrawalRequest: 'WithdrawalRequest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -79,7 +80,9 @@ export const UserScalarFieldEnum = {
   first_name: 'first_name',
   last_name: 'last_name',
   username: 'username',
+  telegram_id: 'telegram_id',
   balance: 'balance',
+  reserved_balance: 'reserved_balance',
   created_at: 'created_at'
 } as const
 
@@ -134,6 +137,19 @@ export const TonTransactionScalarFieldEnum = {
 export type TonTransactionScalarFieldEnum = (typeof TonTransactionScalarFieldEnum)[keyof typeof TonTransactionScalarFieldEnum]
 
 
+export const WithdrawalRequestScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  amount: 'amount',
+  wallet: 'wallet',
+  status: 'status',
+  created_at: 'created_at',
+  processed_at: 'processed_at'
+} as const
+
+export type WithdrawalRequestScalarFieldEnum = (typeof WithdrawalRequestScalarFieldEnum)[keyof typeof WithdrawalRequestScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -148,4 +164,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
