@@ -21,8 +21,8 @@ export default function upgradeWorkersCommand(bot: Telegraf<MyContext>) {
             }
 
             // получаем чат (1 активный)
-            const chat = await prisma.chat.findFirst({
-                where: { id: user.id },
+            const chat = await prisma.chat.findUnique({
+                where: { id: ctx.chat.id },
             });
 
             if (!chat) {
@@ -60,7 +60,7 @@ export default function upgradeWorkersCommand(bot: Telegraf<MyContext>) {
             if (!user) return ctx.answerCbQuery('❌ Пользователь не найден');
 
             const chat = await prisma.chat.findFirst({
-                where: { id: user.id },
+                where: { id: ctx.chat?.id },
             });
 
             if (!chat) return ctx.answerCbQuery('❌ Чат не найден');
