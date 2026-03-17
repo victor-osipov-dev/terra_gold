@@ -9,7 +9,7 @@ export default function startCommand(bot: Telegraf<MyContext>) {
 
             // получаем пользователя
             const user = await prisma.user.findUnique({
-                where: { telegram_id: BigInt(telegramId) }
+                where: { id: BigInt(telegramId) }
             });
 
             if (!user) {
