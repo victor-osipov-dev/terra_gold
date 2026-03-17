@@ -214,7 +214,7 @@ export type UserGroupByOutputType = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint
+  telegram_id: bigint | null
   balance: runtime.Decimal
   reserved_balance: runtime.Decimal
   created_at: Date
@@ -248,7 +248,7 @@ export type UserWhereInput = {
   first_name?: Prisma.StringFilter<"User"> | string
   last_name?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
-  telegram_id?: Prisma.BigIntFilter<"User"> | bigint | number
+  telegram_id?: Prisma.BigIntNullableFilter<"User"> | bigint | number | null
   balance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -261,7 +261,7 @@ export type UserOrderByWithRelationInput = {
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
+  telegram_id?: Prisma.SortOrderInput | Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -290,7 +290,7 @@ export type UserOrderByWithAggregationInput = {
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
+  telegram_id?: Prisma.SortOrderInput | Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -309,7 +309,7 @@ export type UserScalarWhereWithAggregatesInput = {
   first_name?: Prisma.StringWithAggregatesFilter<"User"> | string
   last_name?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
-  telegram_id?: Prisma.BigIntWithAggregatesFilter<"User"> | bigint | number
+  telegram_id?: Prisma.BigIntNullableWithAggregatesFilter<"User"> | bigint | number | null
   balance?: Prisma.DecimalWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -320,7 +320,7 @@ export type UserCreateInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -333,7 +333,7 @@ export type UserUncheckedCreateInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -346,7 +346,7 @@ export type UserUpdateInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -359,7 +359,7 @@ export type UserUncheckedUpdateInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -372,7 +372,7 @@ export type UserCreateManyInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -383,7 +383,7 @@ export type UserUpdateManyMutationInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -394,7 +394,7 @@ export type UserUncheckedUpdateManyInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -464,6 +464,14 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
+export type NullableBigIntFieldUpdateOperationsInput = {
+  set?: bigint | number | null
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -509,7 +517,7 @@ export type UserCreateWithoutUserChatsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -521,7 +529,7 @@ export type UserUncheckedCreateWithoutUserChatsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -549,7 +557,7 @@ export type UserUpdateWithoutUserChatsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -561,7 +569,7 @@ export type UserUncheckedUpdateWithoutUserChatsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -573,7 +581,7 @@ export type UserCreateWithoutWithdrawalsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -585,7 +593,7 @@ export type UserUncheckedCreateWithoutWithdrawalsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | number
+  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -613,7 +621,7 @@ export type UserUpdateWithoutWithdrawalsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -625,7 +633,7 @@ export type UserUncheckedUpdateWithoutWithdrawalsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -739,7 +747,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     first_name: string
     last_name: string
     username: string
-    telegram_id: bigint
+    telegram_id: bigint | null
     balance: runtime.Decimal
     reserved_balance: runtime.Decimal
     created_at: Date

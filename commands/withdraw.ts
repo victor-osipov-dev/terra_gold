@@ -5,7 +5,7 @@ import { prisma } from "../api";
 export default function withdrawCommands(bot: Telegraf<any>) {
     const stage = new Scenes.Stage([withdrawScene]);
 
-    bot.use(session());
+
     bot.use(stage.middleware());
 
     // 🚀 старт вывода

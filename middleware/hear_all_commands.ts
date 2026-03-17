@@ -10,6 +10,14 @@ export default function startCommand(bot: Telegraf<MyContext>) {
 
         findOrCreateChatAndUser({ user, chat });
 
+	if ("text" in ctx.message && ctx.message.text.startsWith("/")) {
+        	if (ctx.scene?.current) {
+            		await ctx.scene.leave();
+        	}
+
+        	ctx.session = {}; // очищаем сессию
+    	}
+
         if (ctx.session?.state) ctx.session.state = undefined;
 
         await next(); // передаём управление конкретной команде
