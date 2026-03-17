@@ -54,7 +54,7 @@ export const ModelName = {
   User: 'User',
   Chat: 'Chat',
   Resource: 'Resource',
-  UserChat: 'UserChat',
+  UserChatActivity: 'UserChatActivity',
   TonTransaction: 'TonTransaction',
   WithdrawalRequest: 'WithdrawalRequest'
 } as const
@@ -80,7 +80,6 @@ export const UserScalarFieldEnum = {
   first_name: 'first_name',
   last_name: 'last_name',
   username: 'username',
-  telegram_id: 'telegram_id',
   balance: 'balance',
   reserved_balance: 'reserved_balance',
   created_at: 'created_at'
@@ -114,7 +113,7 @@ export const ResourceScalarFieldEnum = {
 export type ResourceScalarFieldEnum = (typeof ResourceScalarFieldEnum)[keyof typeof ResourceScalarFieldEnum]
 
 
-export const UserChatScalarFieldEnum = {
+export const UserChatActivityScalarFieldEnum = {
   user_id: 'user_id',
   chat_id: 'chat_id',
   total_messages: 'total_messages',
@@ -122,7 +121,7 @@ export const UserChatScalarFieldEnum = {
   joined_at: 'joined_at'
 } as const
 
-export type UserChatScalarFieldEnum = (typeof UserChatScalarFieldEnum)[keyof typeof UserChatScalarFieldEnum]
+export type UserChatActivityScalarFieldEnum = (typeof UserChatActivityScalarFieldEnum)[keyof typeof UserChatActivityScalarFieldEnum]
 
 
 export const TonTransactionScalarFieldEnum = {

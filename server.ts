@@ -57,12 +57,12 @@ app.post("/api/verify", async (req: Request, res: Response) => {
             id: user.id
         }
     })
-    const all_chats_user_count = await prisma.userChat.count({
+    const all_chats_user_count = await prisma.userChatActivity.count({
         where: {
             user_id: user.id
         },
     })
-    // const own_user_chats_count = await prisma.userChat.count({
+    // const own_user_chats_count = await prisma.userChatActivity.count({
     //     where: {
     //         user_id: user.id,
     //     },

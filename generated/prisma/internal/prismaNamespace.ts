@@ -387,7 +387,7 @@ export const ModelName = {
   User: 'User',
   Chat: 'Chat',
   Resource: 'Resource',
-  UserChat: 'UserChat',
+  UserChatActivity: 'UserChatActivity',
   TonTransaction: 'TonTransaction',
   WithdrawalRequest: 'WithdrawalRequest'
 } as const
@@ -405,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "chat" | "resource" | "userChat" | "tonTransaction" | "withdrawalRequest"
+    modelProps: "user" | "chat" | "resource" | "userChatActivity" | "tonTransaction" | "withdrawalRequest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -631,77 +631,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    UserChat: {
-      payload: Prisma.$UserChatPayload<ExtArgs>
-      fields: Prisma.UserChatFieldRefs
+    UserChatActivity: {
+      payload: Prisma.$UserChatActivityPayload<ExtArgs>
+      fields: Prisma.UserChatActivityFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.UserChatFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload> | null
+          args: Prisma.UserChatActivityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.UserChatFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>
+          args: Prisma.UserChatActivityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>
         }
         findFirst: {
-          args: Prisma.UserChatFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload> | null
+          args: Prisma.UserChatActivityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.UserChatFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>
+          args: Prisma.UserChatActivityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>
         }
         findMany: {
-          args: Prisma.UserChatFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>[]
+          args: Prisma.UserChatActivityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>[]
         }
         create: {
-          args: Prisma.UserChatCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>
+          args: Prisma.UserChatActivityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>
         }
         createMany: {
-          args: Prisma.UserChatCreateManyArgs<ExtArgs>
+          args: Prisma.UserChatActivityCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.UserChatCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>[]
+          args: Prisma.UserChatActivityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>[]
         }
         delete: {
-          args: Prisma.UserChatDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>
+          args: Prisma.UserChatActivityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>
         }
         update: {
-          args: Prisma.UserChatUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>
+          args: Prisma.UserChatActivityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>
         }
         deleteMany: {
-          args: Prisma.UserChatDeleteManyArgs<ExtArgs>
+          args: Prisma.UserChatActivityDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.UserChatUpdateManyArgs<ExtArgs>
+          args: Prisma.UserChatActivityUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.UserChatUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>[]
+          args: Prisma.UserChatActivityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>[]
         }
         upsert: {
-          args: Prisma.UserChatUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatPayload>
+          args: Prisma.UserChatActivityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserChatActivityPayload>
         }
         aggregate: {
-          args: Prisma.UserChatAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateUserChat>
+          args: Prisma.UserChatActivityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserChatActivity>
         }
         groupBy: {
-          args: Prisma.UserChatGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UserChatGroupByOutputType>[]
+          args: Prisma.UserChatActivityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserChatActivityGroupByOutputType>[]
         }
         count: {
-          args: Prisma.UserChatCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UserChatCountAggregateOutputType> | number
+          args: Prisma.UserChatActivityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserChatActivityCountAggregateOutputType> | number
         }
       }
     }
@@ -897,7 +897,6 @@ export const UserScalarFieldEnum = {
   first_name: 'first_name',
   last_name: 'last_name',
   username: 'username',
-  telegram_id: 'telegram_id',
   balance: 'balance',
   reserved_balance: 'reserved_balance',
   created_at: 'created_at'
@@ -931,7 +930,7 @@ export const ResourceScalarFieldEnum = {
 export type ResourceScalarFieldEnum = (typeof ResourceScalarFieldEnum)[keyof typeof ResourceScalarFieldEnum]
 
 
-export const UserChatScalarFieldEnum = {
+export const UserChatActivityScalarFieldEnum = {
   user_id: 'user_id',
   chat_id: 'chat_id',
   total_messages: 'total_messages',
@@ -939,7 +938,7 @@ export const UserChatScalarFieldEnum = {
   joined_at: 'joined_at'
 } as const
 
-export type UserChatScalarFieldEnum = (typeof UserChatScalarFieldEnum)[keyof typeof UserChatScalarFieldEnum]
+export type UserChatActivityScalarFieldEnum = (typeof UserChatActivityScalarFieldEnum)[keyof typeof UserChatActivityScalarFieldEnum]
 
 
 export const TonTransactionScalarFieldEnum = {
@@ -1192,7 +1191,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   chat?: Prisma.ChatOmit
   resource?: Prisma.ResourceOmit
-  userChat?: Prisma.UserChatOmit
+  userChatActivity?: Prisma.UserChatActivityOmit
   tonTransaction?: Prisma.TonTransactionOmit
   withdrawalRequest?: Prisma.WithdrawalRequestOmit
 }

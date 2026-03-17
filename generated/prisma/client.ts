@@ -57,10 +57,10 @@ export type Chat = Prisma.ChatModel
  */
 export type Resource = Prisma.ResourceModel
 /**
- * Model UserChat
+ * Model UserChatActivity
  * 
  */
-export type UserChat = Prisma.UserChatModel
+export type UserChatActivity = Prisma.UserChatActivityModel
 /**
  * Model TonTransaction
  * 

@@ -2,7 +2,7 @@ import cron from "node-cron";
 import { prisma } from "./api";
 
 async function resetStatisticsForHour() {
-    await prisma.userChat.updateMany({
+    await prisma.userChatActivity.updateMany({
         data: {
             messages_per_hour: 0,
         },

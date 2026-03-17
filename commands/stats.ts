@@ -7,7 +7,7 @@ export default function startCommand(bot: Telegraf<Context>) {
         const user = msg.from;
         const chat = msg.chat;
         // ctx — контекст сообщения
-        const users_chats = await prisma.userChat.findMany({
+        const users_chats = await prisma.userChatActivity.findMany({
             where: { chat_id: chat.id, NOT: { messages_per_hour: 0 } },
             include: { user: true },
         });

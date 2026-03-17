@@ -28,14 +28,12 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   id: number | null
-  telegram_id: number | null
   balance: runtime.Decimal | null
   reserved_balance: runtime.Decimal | null
 }
 
 export type UserSumAggregateOutputType = {
   id: bigint | null
-  telegram_id: bigint | null
   balance: runtime.Decimal | null
   reserved_balance: runtime.Decimal | null
 }
@@ -45,7 +43,6 @@ export type UserMinAggregateOutputType = {
   first_name: string | null
   last_name: string | null
   username: string | null
-  telegram_id: bigint | null
   balance: runtime.Decimal | null
   reserved_balance: runtime.Decimal | null
   created_at: Date | null
@@ -56,7 +53,6 @@ export type UserMaxAggregateOutputType = {
   first_name: string | null
   last_name: string | null
   username: string | null
-  telegram_id: bigint | null
   balance: runtime.Decimal | null
   reserved_balance: runtime.Decimal | null
   created_at: Date | null
@@ -67,7 +63,6 @@ export type UserCountAggregateOutputType = {
   first_name: number
   last_name: number
   username: number
-  telegram_id: number
   balance: number
   reserved_balance: number
   created_at: number
@@ -77,14 +72,12 @@ export type UserCountAggregateOutputType = {
 
 export type UserAvgAggregateInputType = {
   id?: true
-  telegram_id?: true
   balance?: true
   reserved_balance?: true
 }
 
 export type UserSumAggregateInputType = {
   id?: true
-  telegram_id?: true
   balance?: true
   reserved_balance?: true
 }
@@ -94,7 +87,6 @@ export type UserMinAggregateInputType = {
   first_name?: true
   last_name?: true
   username?: true
-  telegram_id?: true
   balance?: true
   reserved_balance?: true
   created_at?: true
@@ -105,7 +97,6 @@ export type UserMaxAggregateInputType = {
   first_name?: true
   last_name?: true
   username?: true
-  telegram_id?: true
   balance?: true
   reserved_balance?: true
   created_at?: true
@@ -116,7 +107,6 @@ export type UserCountAggregateInputType = {
   first_name?: true
   last_name?: true
   username?: true
-  telegram_id?: true
   balance?: true
   reserved_balance?: true
   created_at?: true
@@ -214,7 +204,6 @@ export type UserGroupByOutputType = {
   first_name: string
   last_name: string
   username: string
-  telegram_id: bigint | null
   balance: runtime.Decimal
   reserved_balance: runtime.Decimal
   created_at: Date
@@ -248,11 +237,10 @@ export type UserWhereInput = {
   first_name?: Prisma.StringFilter<"User"> | string
   last_name?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
-  telegram_id?: Prisma.BigIntNullableFilter<"User"> | bigint | number | null
   balance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
-  userChats?: Prisma.UserChatListRelationFilter
+  userChats?: Prisma.UserChatActivityListRelationFilter
   withdrawals?: Prisma.WithdrawalRequestListRelationFilter
 }
 
@@ -261,18 +249,16 @@ export type UserOrderByWithRelationInput = {
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrderInput | Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  userChats?: Prisma.UserChatOrderByRelationAggregateInput
+  userChats?: Prisma.UserChatActivityOrderByRelationAggregateInput
   withdrawals?: Prisma.WithdrawalRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
   username?: string
-  telegram_id?: bigint | number
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -281,16 +267,15 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   balance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
-  userChats?: Prisma.UserChatListRelationFilter
+  userChats?: Prisma.UserChatActivityListRelationFilter
   withdrawals?: Prisma.WithdrawalRequestListRelationFilter
-}, "id" | "username" | "telegram_id">
+}, "id" | "username">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrderInput | Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -309,7 +294,6 @@ export type UserScalarWhereWithAggregatesInput = {
   first_name?: Prisma.StringWithAggregatesFilter<"User"> | string
   last_name?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
-  telegram_id?: Prisma.BigIntNullableWithAggregatesFilter<"User"> | bigint | number | null
   balance?: Prisma.DecimalWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalWithAggregatesFilter<"User"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -320,11 +304,10 @@ export type UserCreateInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
-  userChats?: Prisma.UserChatCreateNestedManyWithoutUserInput
+  userChats?: Prisma.UserChatActivityCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalRequestCreateNestedManyWithoutUserInput
 }
 
@@ -333,11 +316,10 @@ export type UserUncheckedCreateInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
-  userChats?: Prisma.UserChatUncheckedCreateNestedManyWithoutUserInput
+  userChats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalRequestUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -346,11 +328,10 @@ export type UserUpdateInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userChats?: Prisma.UserChatUpdateManyWithoutUserNestedInput
+  userChats?: Prisma.UserChatActivityUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalRequestUpdateManyWithoutUserNestedInput
 }
 
@@ -359,11 +340,10 @@ export type UserUncheckedUpdateInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userChats?: Prisma.UserChatUncheckedUpdateManyWithoutUserNestedInput
+  userChats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -372,7 +352,6 @@ export type UserCreateManyInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -383,7 +362,6 @@ export type UserUpdateManyMutationInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -394,7 +372,6 @@ export type UserUncheckedUpdateManyInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -405,7 +382,6 @@ export type UserCountOrderByAggregateInput = {
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -413,7 +389,6 @@ export type UserCountOrderByAggregateInput = {
 
 export type UserAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
 }
@@ -423,7 +398,6 @@ export type UserMaxOrderByAggregateInput = {
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -434,7 +408,6 @@ export type UserMinOrderByAggregateInput = {
   first_name?: Prisma.SortOrder
   last_name?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -442,7 +415,6 @@ export type UserMinOrderByAggregateInput = {
 
 export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  telegram_id?: Prisma.SortOrder
   balance?: Prisma.SortOrder
   reserved_balance?: Prisma.SortOrder
 }
@@ -462,14 +434,6 @@ export type BigIntFieldUpdateOperationsInput = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
-}
-
-export type NullableBigIntFieldUpdateOperationsInput = {
-  set?: bigint | number | null
-  increment?: bigint | number
-  decrement?: bigint | number
-  multiply?: bigint | number
-  divide?: bigint | number
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -517,7 +481,6 @@ export type UserCreateWithoutUserChatsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -529,7 +492,6 @@ export type UserUncheckedCreateWithoutUserChatsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
@@ -557,7 +519,6 @@ export type UserUpdateWithoutUserChatsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -569,7 +530,6 @@ export type UserUncheckedUpdateWithoutUserChatsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -581,11 +541,10 @@ export type UserCreateWithoutWithdrawalsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
-  userChats?: Prisma.UserChatCreateNestedManyWithoutUserInput
+  userChats?: Prisma.UserChatActivityCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutWithdrawalsInput = {
@@ -593,11 +552,10 @@ export type UserUncheckedCreateWithoutWithdrawalsInput = {
   first_name: string
   last_name: string
   username: string
-  telegram_id?: bigint | number | null
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
-  userChats?: Prisma.UserChatUncheckedCreateNestedManyWithoutUserInput
+  userChats?: Prisma.UserChatActivityUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutWithdrawalsInput = {
@@ -621,11 +579,10 @@ export type UserUpdateWithoutWithdrawalsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userChats?: Prisma.UserChatUpdateManyWithoutUserNestedInput
+  userChats?: Prisma.UserChatActivityUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWithdrawalsInput = {
@@ -633,11 +590,10 @@ export type UserUncheckedUpdateWithoutWithdrawalsInput = {
   first_name?: Prisma.StringFieldUpdateOperationsInput | string
   last_name?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  telegram_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   reserved_balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userChats?: Prisma.UserChatUncheckedUpdateManyWithoutUserNestedInput
+  userChats?: Prisma.UserChatActivityUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -669,7 +625,7 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  * UserCountOutputType without action
  */
 export type UserCountOutputTypeCountUserChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserChatWhereInput
+  where?: Prisma.UserChatActivityWhereInput
 }
 
 /**
@@ -685,7 +641,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   first_name?: boolean
   last_name?: boolean
   username?: boolean
-  telegram_id?: boolean
   balance?: boolean
   reserved_balance?: boolean
   created_at?: boolean
@@ -699,7 +654,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   first_name?: boolean
   last_name?: boolean
   username?: boolean
-  telegram_id?: boolean
   balance?: boolean
   reserved_balance?: boolean
   created_at?: boolean
@@ -710,7 +664,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   first_name?: boolean
   last_name?: boolean
   username?: boolean
-  telegram_id?: boolean
   balance?: boolean
   reserved_balance?: boolean
   created_at?: boolean
@@ -721,13 +674,12 @@ export type UserSelectScalar = {
   first_name?: boolean
   last_name?: boolean
   username?: boolean
-  telegram_id?: boolean
   balance?: boolean
   reserved_balance?: boolean
   created_at?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "first_name" | "last_name" | "username" | "telegram_id" | "balance" | "reserved_balance" | "created_at", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "first_name" | "last_name" | "username" | "balance" | "reserved_balance" | "created_at", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userChats?: boolean | Prisma.User$userChatsArgs<ExtArgs>
   withdrawals?: boolean | Prisma.User$withdrawalsArgs<ExtArgs>
@@ -739,7 +691,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    userChats: Prisma.$UserChatPayload<ExtArgs>[]
+    userChats: Prisma.$UserChatActivityPayload<ExtArgs>[]
     withdrawals: Prisma.$WithdrawalRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -747,7 +699,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     first_name: string
     last_name: string
     username: string
-    telegram_id: bigint | null
     balance: runtime.Decimal
     reserved_balance: runtime.Decimal
     created_at: Date
@@ -1145,7 +1096,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  userChats<T extends Prisma.User$userChatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userChatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userChats<T extends Prisma.User$userChatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userChatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserChatActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   withdrawals<T extends Prisma.User$withdrawalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WithdrawalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1180,7 +1131,6 @@ export interface UserFieldRefs {
   readonly first_name: Prisma.FieldRef<"User", 'String'>
   readonly last_name: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
-  readonly telegram_id: Prisma.FieldRef<"User", 'BigInt'>
   readonly balance: Prisma.FieldRef<"User", 'Decimal'>
   readonly reserved_balance: Prisma.FieldRef<"User", 'Decimal'>
   readonly created_at: Prisma.FieldRef<"User", 'DateTime'>
@@ -1581,23 +1531,23 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export type User$userChatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UserChat
+   * Select specific fields to fetch from the UserChatActivity
    */
-  select?: Prisma.UserChatSelect<ExtArgs> | null
+  select?: Prisma.UserChatActivitySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UserChat
+   * Omit specific fields from the UserChatActivity
    */
-  omit?: Prisma.UserChatOmit<ExtArgs> | null
+  omit?: Prisma.UserChatActivityOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserChatInclude<ExtArgs> | null
-  where?: Prisma.UserChatWhereInput
-  orderBy?: Prisma.UserChatOrderByWithRelationInput | Prisma.UserChatOrderByWithRelationInput[]
-  cursor?: Prisma.UserChatWhereUniqueInput
+  include?: Prisma.UserChatActivityInclude<ExtArgs> | null
+  where?: Prisma.UserChatActivityWhereInput
+  orderBy?: Prisma.UserChatActivityOrderByWithRelationInput | Prisma.UserChatActivityOrderByWithRelationInput[]
+  cursor?: Prisma.UserChatActivityWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserChatScalarFieldEnum | Prisma.UserChatScalarFieldEnum[]
+  distinct?: Prisma.UserChatActivityScalarFieldEnum | Prisma.UserChatActivityScalarFieldEnum[]
 }
 
 /**

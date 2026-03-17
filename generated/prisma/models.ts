@@ -11,7 +11,7 @@
 export type * from './models/User.ts'
 export type * from './models/Chat.ts'
 export type * from './models/Resource.ts'
-export type * from './models/UserChat.ts'
+export type * from './models/UserChatActivity.ts'
 export type * from './models/TonTransaction.ts'
 export type * from './models/WithdrawalRequest.ts'
 export type * from './commonInputTypes.ts'

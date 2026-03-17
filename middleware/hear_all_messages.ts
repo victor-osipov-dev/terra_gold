@@ -14,12 +14,12 @@ export default function startCommand(bot: Telegraf<MyContext>) {
         const { user: new_user, chat: new_chat } =
             await findOrCreateChatAndUser({ user, chat });
 
-        let user_chat = await prisma.userChat.findFirst({
+        let user_chat = await prisma.userChatActivity.findFirst({
             where: { user_id: new_user.id, chat_id: new_chat.id },
         });
 
         if (user_chat) {
-            user_chat = await prisma.userChat.update({
+            user_chat = await prisma.userChatActivity.update({
                 where: {
                     user_id_chat_id: {
                         chat_id: new_chat.id,
@@ -32,7 +32,7 @@ export default function startCommand(bot: Telegraf<MyContext>) {
                 },
             });
         } else {
-            user_chat = await prisma.userChat.create({
+            user_chat = await prisma.userChatActivity.create({
                 data: {
                     user_id: new_user.id,
                     chat_id: new_chat.id,
