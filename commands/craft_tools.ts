@@ -17,16 +17,13 @@ export default function startCommand(bot: Telegraf<MyContext>) {
                 return ctx.reply('❌ Пользователь не найден');
             }
 
-            const userChat = await prisma.userChat.findFirst({
-                where: { user_id: user.id },
-                include: { chat: true }
+            const chat = await prisma.chat.findUnique({
+                where: { id: ctx.chat.id },
             });
 
-            if (!userChat) {
+            if (!chat) {
                 return ctx.reply('❌ Чат не найден');
             }
-
-            const chat = userChat.chat;
 
             const args = ctx.message.text.split(' ');
             const amount = parseInt(args[1]);
@@ -63,7 +60,7 @@ export default function startCommand(bot: Telegraf<MyContext>) {
             }
 
             await prisma.chat.update({
-                where: { id: chat.id },
+                where: { id: ctx.chat.id },
                 data: {
                     materials: {
                         decrement: requiredMaterials
@@ -99,16 +96,14 @@ export default function startCommand(bot: Telegraf<MyContext>) {
                 return ctx.answerCbQuery('❌ Пользователь не найден');
             }
 
-            const userChat = await prisma.userChat.findFirst({
-                where: { user_id: user.id },
-                include: { chat: true }
+            const chat = await prisma.chat.findUnique({
+                where: { id: ctx.chat?.id },
             });
 
-            if (!userChat) {
+            if (!chat) {
                 return ctx.answerCbQuery('❌ Чат не найден');
             }
 
-            const chat = userChat.chat;
             const requiredMaterials = amount * 2;
 
             if (chat.materials < requiredMaterials) {
