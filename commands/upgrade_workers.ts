@@ -21,16 +21,13 @@ export default function upgradeWorkersCommand(bot: Telegraf<MyContext>) {
             }
 
             // получаем чат (1 активный)
-            const userChat = await prisma.userChat.findFirst({
-                where: { user_id: user.id },
-                include: { chat: true }
+            const chat = await prisma.chat.findFirst({
+                where: { id: user.id },
             });
 
-            if (!userChat) {
+            if (!chat) {
                 return ctx.reply('❌ Чат не найден');
             }
-
-            const chat = userChat.chat;
 
             // если есть баланс — показываем кнопку для повышения
             if (user.balance.lt(UPGRADE_COST_USDT)) {
@@ -62,14 +59,11 @@ export default function upgradeWorkersCommand(bot: Telegraf<MyContext>) {
 
             if (!user) return ctx.answerCbQuery('❌ Пользователь не найден');
 
-            const userChat = await prisma.userChat.findFirst({
-                where: { user_id: user.id },
-                include: { chat: true }
+            const chat = await prisma.chat.findFirst({
+                where: { id: user.id },
             });
 
-            if (!userChat) return ctx.answerCbQuery('❌ Чат не найден');
-
-            const chat = userChat.chat;
+            if (!chat) return ctx.answerCbQuery('❌ Чат не найден');
 
             if (user.balance.lt(UPGRADE_COST_USDT)) {
                 return ctx.answerCbQuery('❌ Недостаточно USDT');
