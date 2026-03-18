@@ -54,9 +54,11 @@ model Resource {
 model UserChatActivity {
   user_id    BigInt
   chat_id    BigInt
-  total_messages    Int
-  messages_per_hour Int
+  total_messages    Int  @default(0)
+  messages_per_hour Int  @default(0)
   joined_at DateTime     @default(now())
+  role      String?
+  role_updated_at DateTime     @default(now())
 
   user      User @relation(fields: [user_id], references: [id])
   chat      Chat @relation(fields: [chat_id], references: [id])

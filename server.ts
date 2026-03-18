@@ -2,9 +2,10 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { verifyTelegramInitData } from "./libs";
-import { prisma } from "./api";
+import { bot, prisma } from "./api";
 import { beginCell } from "@ton/core";
 
+const FIVE_MINUTES = 5 * 60 * 1000;
 export const app = express();
 app.use(express.json());
 app.use(cors());
@@ -77,3 +78,83 @@ app.post("/api/verify", async (req: Request, res: Response) => {
         },
     });
 });
+
+
+app.get('/user/:user_id/admin-chats-live', async (req, res) => {
+    try {
+        const userId = BigInt(req.params.user_id)
+
+        // 1. Берём все чаты пользователя из БД
+        const userChats = await prisma.userChatActivity.findMany({
+            where: {
+                user_id: userId,
+            },
+            include: {
+                chat: true,
+            },
+        })
+
+        // 2. Проверяем роль в Telegram для каждого чата
+        const results = []
+        const updatedRoles = []
+
+        for (const item of userChats) {
+            if (!item.role || (Date.now() - +item.role_updated_at >= FIVE_MINUTES)) {
+                try {
+                    const member = await bot.telegram.getChatMember(
+                        Number(item.chat_id),
+                        Number(item.user_id)
+                    )
+
+                    updatedRoles.push({
+                        user_id: item.user_id,
+                        chat_id: item.chat.id,
+                        title: item.chat.title,
+                        role: member.status, // актуальная роль из Telegram
+                    })
+                    item.role = member.status
+                } catch (err: any) {
+                    console.warn(
+                        `Не удалось получить роль для chat ${item.chat_id}:`,
+                        err.description || err.message
+                    )
+                }
+            };
+
+            if (
+                item.role === 'administrator' ||
+                item.role === 'creator'
+            ) {
+                results.push({
+                    chat_id: item.chat.id,
+                    title: item.chat.title,
+                    role: item.role,
+                })
+            }
+        }
+
+        const now = new Date().toISOString() // формат ISO для PostgreSQL
+
+        const values = updatedRoles
+            .map(
+                ({ user_id, chat_id, role }) =>
+                    `(${user_id}, ${chat_id}, '${role}', '${now}')`
+            )
+            .join(',')
+
+        await prisma.$executeRawUnsafe(`
+            INSERT INTO "UserChatActivity" 
+                ("user_id", "chat_id", "role", "role_updated_at")
+            VALUES ${values}
+            ON CONFLICT ("user_id", "chat_id")
+            DO UPDATE SET 
+                role = EXCLUDED.role,
+                role_updated_at = EXCLUDED.role_updated_at
+        `)
+
+        res.json(results)
+    } catch (error: any) {
+        console.error(error)
+        res.status(500).json({ error: 'Internal server error' })
+    }
+})

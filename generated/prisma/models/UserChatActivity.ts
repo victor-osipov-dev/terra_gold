@@ -46,6 +46,8 @@ export type UserChatActivityMinAggregateOutputType = {
   total_messages: number | null
   messages_per_hour: number | null
   joined_at: Date | null
+  role: string | null
+  role_updated_at: Date | null
 }
 
 export type UserChatActivityMaxAggregateOutputType = {
@@ -54,6 +56,8 @@ export type UserChatActivityMaxAggregateOutputType = {
   total_messages: number | null
   messages_per_hour: number | null
   joined_at: Date | null
+  role: string | null
+  role_updated_at: Date | null
 }
 
 export type UserChatActivityCountAggregateOutputType = {
@@ -62,6 +66,8 @@ export type UserChatActivityCountAggregateOutputType = {
   total_messages: number
   messages_per_hour: number
   joined_at: number
+  role: number
+  role_updated_at: number
   _all: number
 }
 
@@ -86,6 +92,8 @@ export type UserChatActivityMinAggregateInputType = {
   total_messages?: true
   messages_per_hour?: true
   joined_at?: true
+  role?: true
+  role_updated_at?: true
 }
 
 export type UserChatActivityMaxAggregateInputType = {
@@ -94,6 +102,8 @@ export type UserChatActivityMaxAggregateInputType = {
   total_messages?: true
   messages_per_hour?: true
   joined_at?: true
+  role?: true
+  role_updated_at?: true
 }
 
 export type UserChatActivityCountAggregateInputType = {
@@ -102,6 +112,8 @@ export type UserChatActivityCountAggregateInputType = {
   total_messages?: true
   messages_per_hour?: true
   joined_at?: true
+  role?: true
+  role_updated_at?: true
   _all?: true
 }
 
@@ -197,6 +209,8 @@ export type UserChatActivityGroupByOutputType = {
   total_messages: number
   messages_per_hour: number
   joined_at: Date
+  role: string | null
+  role_updated_at: Date
   _count: UserChatActivityCountAggregateOutputType | null
   _avg: UserChatActivityAvgAggregateOutputType | null
   _sum: UserChatActivitySumAggregateOutputType | null
@@ -228,6 +242,8 @@ export type UserChatActivityWhereInput = {
   total_messages?: Prisma.IntFilter<"UserChatActivity"> | number
   messages_per_hour?: Prisma.IntFilter<"UserChatActivity"> | number
   joined_at?: Prisma.DateTimeFilter<"UserChatActivity"> | Date | string
+  role?: Prisma.StringNullableFilter<"UserChatActivity"> | string | null
+  role_updated_at?: Prisma.DateTimeFilter<"UserChatActivity"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   chat?: Prisma.XOR<Prisma.ChatScalarRelationFilter, Prisma.ChatWhereInput>
 }
@@ -238,6 +254,8 @@ export type UserChatActivityOrderByWithRelationInput = {
   total_messages?: Prisma.SortOrder
   messages_per_hour?: Prisma.SortOrder
   joined_at?: Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  role_updated_at?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   chat?: Prisma.ChatOrderByWithRelationInput
 }
@@ -252,6 +270,8 @@ export type UserChatActivityWhereUniqueInput = Prisma.AtLeast<{
   total_messages?: Prisma.IntFilter<"UserChatActivity"> | number
   messages_per_hour?: Prisma.IntFilter<"UserChatActivity"> | number
   joined_at?: Prisma.DateTimeFilter<"UserChatActivity"> | Date | string
+  role?: Prisma.StringNullableFilter<"UserChatActivity"> | string | null
+  role_updated_at?: Prisma.DateTimeFilter<"UserChatActivity"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   chat?: Prisma.XOR<Prisma.ChatScalarRelationFilter, Prisma.ChatWhereInput>
 }, "user_id_chat_id">
@@ -262,6 +282,8 @@ export type UserChatActivityOrderByWithAggregationInput = {
   total_messages?: Prisma.SortOrder
   messages_per_hour?: Prisma.SortOrder
   joined_at?: Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  role_updated_at?: Prisma.SortOrder
   _count?: Prisma.UserChatActivityCountOrderByAggregateInput
   _avg?: Prisma.UserChatActivityAvgOrderByAggregateInput
   _max?: Prisma.UserChatActivityMaxOrderByAggregateInput
@@ -278,12 +300,16 @@ export type UserChatActivityScalarWhereWithAggregatesInput = {
   total_messages?: Prisma.IntWithAggregatesFilter<"UserChatActivity"> | number
   messages_per_hour?: Prisma.IntWithAggregatesFilter<"UserChatActivity"> | number
   joined_at?: Prisma.DateTimeWithAggregatesFilter<"UserChatActivity"> | Date | string
+  role?: Prisma.StringNullableWithAggregatesFilter<"UserChatActivity"> | string | null
+  role_updated_at?: Prisma.DateTimeWithAggregatesFilter<"UserChatActivity"> | Date | string
 }
 
 export type UserChatActivityCreateInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserChatsInput
   chat: Prisma.ChatCreateNestedOneWithoutUser_chatsInput
 }
@@ -294,12 +320,16 @@ export type UserChatActivityUncheckedCreateInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
 }
 
 export type UserChatActivityUpdateInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserChatsNestedInput
   chat?: Prisma.ChatUpdateOneRequiredWithoutUser_chatsNestedInput
 }
@@ -310,6 +340,8 @@ export type UserChatActivityUncheckedUpdateInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserChatActivityCreateManyInput = {
@@ -318,12 +350,16 @@ export type UserChatActivityCreateManyInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
 }
 
 export type UserChatActivityUpdateManyMutationInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserChatActivityUncheckedUpdateManyInput = {
@@ -332,6 +368,8 @@ export type UserChatActivityUncheckedUpdateManyInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserChatActivityListRelationFilter = {
@@ -355,6 +393,8 @@ export type UserChatActivityCountOrderByAggregateInput = {
   total_messages?: Prisma.SortOrder
   messages_per_hour?: Prisma.SortOrder
   joined_at?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  role_updated_at?: Prisma.SortOrder
 }
 
 export type UserChatActivityAvgOrderByAggregateInput = {
@@ -370,6 +410,8 @@ export type UserChatActivityMaxOrderByAggregateInput = {
   total_messages?: Prisma.SortOrder
   messages_per_hour?: Prisma.SortOrder
   joined_at?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  role_updated_at?: Prisma.SortOrder
 }
 
 export type UserChatActivityMinOrderByAggregateInput = {
@@ -378,6 +420,8 @@ export type UserChatActivityMinOrderByAggregateInput = {
   total_messages?: Prisma.SortOrder
   messages_per_hour?: Prisma.SortOrder
   joined_at?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  role_updated_at?: Prisma.SortOrder
 }
 
 export type UserChatActivitySumOrderByAggregateInput = {
@@ -471,10 +515,16 @@ export type UserChatActivityUncheckedUpdateManyWithoutChatNestedInput = {
   deleteMany?: Prisma.UserChatActivityScalarWhereInput | Prisma.UserChatActivityScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type UserChatActivityCreateWithoutUserInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
   chat: Prisma.ChatCreateNestedOneWithoutUser_chatsInput
 }
 
@@ -483,6 +533,8 @@ export type UserChatActivityUncheckedCreateWithoutUserInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
 }
 
 export type UserChatActivityCreateOrConnectWithoutUserInput = {
@@ -520,12 +572,16 @@ export type UserChatActivityScalarWhereInput = {
   total_messages?: Prisma.IntFilter<"UserChatActivity"> | number
   messages_per_hour?: Prisma.IntFilter<"UserChatActivity"> | number
   joined_at?: Prisma.DateTimeFilter<"UserChatActivity"> | Date | string
+  role?: Prisma.StringNullableFilter<"UserChatActivity"> | string | null
+  role_updated_at?: Prisma.DateTimeFilter<"UserChatActivity"> | Date | string
 }
 
 export type UserChatActivityCreateWithoutChatInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
   user: Prisma.UserCreateNestedOneWithoutUserChatsInput
 }
 
@@ -534,6 +590,8 @@ export type UserChatActivityUncheckedCreateWithoutChatInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
 }
 
 export type UserChatActivityCreateOrConnectWithoutChatInput = {
@@ -567,12 +625,16 @@ export type UserChatActivityCreateManyUserInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
 }
 
 export type UserChatActivityUpdateWithoutUserInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chat?: Prisma.ChatUpdateOneRequiredWithoutUser_chatsNestedInput
 }
 
@@ -581,6 +643,8 @@ export type UserChatActivityUncheckedUpdateWithoutUserInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserChatActivityUncheckedUpdateManyWithoutUserInput = {
@@ -588,6 +652,8 @@ export type UserChatActivityUncheckedUpdateManyWithoutUserInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserChatActivityCreateManyChatInput = {
@@ -595,12 +661,16 @@ export type UserChatActivityCreateManyChatInput = {
   total_messages: number
   messages_per_hour: number
   joined_at?: Date | string
+  role?: string | null
+  role_updated_at?: Date | string
 }
 
 export type UserChatActivityUpdateWithoutChatInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutUserChatsNestedInput
 }
 
@@ -609,6 +679,8 @@ export type UserChatActivityUncheckedUpdateWithoutChatInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserChatActivityUncheckedUpdateManyWithoutChatInput = {
@@ -616,6 +688,8 @@ export type UserChatActivityUncheckedUpdateManyWithoutChatInput = {
   total_messages?: Prisma.IntFieldUpdateOperationsInput | number
   messages_per_hour?: Prisma.IntFieldUpdateOperationsInput | number
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role_updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -626,6 +700,8 @@ export type UserChatActivitySelect<ExtArgs extends runtime.Types.Extensions.Inte
   total_messages?: boolean
   messages_per_hour?: boolean
   joined_at?: boolean
+  role?: boolean
+  role_updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chat?: boolean | Prisma.ChatDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userChatActivity"]>
@@ -636,6 +712,8 @@ export type UserChatActivitySelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   total_messages?: boolean
   messages_per_hour?: boolean
   joined_at?: boolean
+  role?: boolean
+  role_updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chat?: boolean | Prisma.ChatDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userChatActivity"]>
@@ -646,6 +724,8 @@ export type UserChatActivitySelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   total_messages?: boolean
   messages_per_hour?: boolean
   joined_at?: boolean
+  role?: boolean
+  role_updated_at?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chat?: boolean | Prisma.ChatDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userChatActivity"]>
@@ -656,9 +736,11 @@ export type UserChatActivitySelectScalar = {
   total_messages?: boolean
   messages_per_hour?: boolean
   joined_at?: boolean
+  role?: boolean
+  role_updated_at?: boolean
 }
 
-export type UserChatActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"user_id" | "chat_id" | "total_messages" | "messages_per_hour" | "joined_at", ExtArgs["result"]["userChatActivity"]>
+export type UserChatActivityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"user_id" | "chat_id" | "total_messages" | "messages_per_hour" | "joined_at" | "role" | "role_updated_at", ExtArgs["result"]["userChatActivity"]>
 export type UserChatActivityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chat?: boolean | Prisma.ChatDefaultArgs<ExtArgs>
@@ -684,6 +766,8 @@ export type $UserChatActivityPayload<ExtArgs extends runtime.Types.Extensions.In
     total_messages: number
     messages_per_hour: number
     joined_at: Date
+    role: string | null
+    role_updated_at: Date
   }, ExtArgs["result"]["userChatActivity"]>
   composites: {}
 }
@@ -1114,6 +1198,8 @@ export interface UserChatActivityFieldRefs {
   readonly total_messages: Prisma.FieldRef<"UserChatActivity", 'Int'>
   readonly messages_per_hour: Prisma.FieldRef<"UserChatActivity", 'Int'>
   readonly joined_at: Prisma.FieldRef<"UserChatActivity", 'DateTime'>
+  readonly role: Prisma.FieldRef<"UserChatActivity", 'String'>
+  readonly role_updated_at: Prisma.FieldRef<"UserChatActivity", 'DateTime'>
 }
     
 

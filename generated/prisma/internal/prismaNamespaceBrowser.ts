@@ -119,7 +119,9 @@ export const UserChatActivityScalarFieldEnum = {
   chat_id: 'chat_id',
   total_messages: 'total_messages',
   messages_per_hour: 'messages_per_hour',
-  joined_at: 'joined_at'
+  joined_at: 'joined_at',
+  role: 'role',
+  role_updated_at: 'role_updated_at'
 } as const
 
 export type UserChatActivityScalarFieldEnum = (typeof UserChatActivityScalarFieldEnum)[keyof typeof UserChatActivityScalarFieldEnum]
