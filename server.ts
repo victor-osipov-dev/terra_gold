@@ -99,13 +99,14 @@ app.get('/user/:user_id/admin-chats-live', async (req, res) => {
         const updatedRoles = []
 
         for (const item of userChats) {
+            
             if (!item.role || (Date.now() - +item.role_updated_at >= FIVE_MINUTES)) {
                 try {
                     const member = await bot.telegram.getChatMember(
                         Number(item.chat_id),
                         Number(item.user_id)
                     )
-
+                    
                     updatedRoles.push({
                         user_id: item.user_id,
                         chat_id: item.chat.id,
@@ -126,31 +127,33 @@ app.get('/user/:user_id/admin-chats-live', async (req, res) => {
                 item.role === 'creator'
             ) {
                 results.push({
-                    chat_id: item.chat.id,
+                    chat_id: item.chat.id.toString(),
                     title: item.chat.title,
                     role: item.role,
                 })
             }
         }
 
-        const now = new Date().toISOString() // формат ISO для PostgreSQL
 
+        // Генерируем значения с корректными одинарными кавычками
         const values = updatedRoles
-            .map(
-                ({ user_id, chat_id, role }) =>
-                    `(${user_id}, ${chat_id}, '${role}', '${now}')`
-            )
+            .map(({ user_id, chat_id, role }) => {
+                return `(${user_id}, ${chat_id}, '${role}', NOW())`
+            })
             .join(',')
 
-        await prisma.$executeRawUnsafe(`
+        const sql = `
             INSERT INTO "UserChatActivity" 
-                ("user_id", "chat_id", "role", "role_updated_at")
+            ("user_id", "chat_id", "role", "role_updated_at")
             VALUES ${values}
             ON CONFLICT ("user_id", "chat_id")
             DO UPDATE SET 
-                role = EXCLUDED.role,
-                role_updated_at = EXCLUDED.role_updated_at
-        `)
+            role = EXCLUDED.role,
+            role_updated_at = EXCLUDED.role_updated_at;
+        `
+
+        if (values.length >= 1)
+            await prisma.$executeRawUnsafe(sql)
 
         res.json(results)
     } catch (error: any) {
