@@ -57,7 +57,8 @@ export const ModelName = {
   UserChatActivity: 'UserChatActivity',
   TonTransaction: 'TonTransaction',
   WithdrawalRequest: 'WithdrawalRequest',
-  MarketListing: 'MarketListing'
+  MarketListing: 'MarketListing',
+  ChatRevenueShare: 'ChatRevenueShare'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -163,6 +164,20 @@ export const MarketListingScalarFieldEnum = {
 } as const
 
 export type MarketListingScalarFieldEnum = (typeof MarketListingScalarFieldEnum)[keyof typeof MarketListingScalarFieldEnum]
+
+
+export const ChatRevenueShareScalarFieldEnum = {
+  id: 'id',
+  chat_id: 'chat_id',
+  user_id: 'user_id',
+  others: 'others',
+  part: 'part',
+  part_type: 'part_type',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ChatRevenueShareScalarFieldEnum = (typeof ChatRevenueShareScalarFieldEnum)[keyof typeof ChatRevenueShareScalarFieldEnum]
 
 
 export const SortOrder = {

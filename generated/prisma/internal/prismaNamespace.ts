@@ -390,7 +390,8 @@ export const ModelName = {
   UserChatActivity: 'UserChatActivity',
   TonTransaction: 'TonTransaction',
   WithdrawalRequest: 'WithdrawalRequest',
-  MarketListing: 'MarketListing'
+  MarketListing: 'MarketListing',
+  ChatRevenueShare: 'ChatRevenueShare'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "chat" | "resource" | "userChatActivity" | "tonTransaction" | "withdrawalRequest" | "marketListing"
+    modelProps: "user" | "chat" | "resource" | "userChatActivity" | "tonTransaction" | "withdrawalRequest" | "marketListing" | "chatRevenueShare"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -928,6 +929,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ChatRevenueShare: {
+      payload: Prisma.$ChatRevenueSharePayload<ExtArgs>
+      fields: Prisma.ChatRevenueShareFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ChatRevenueShareFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ChatRevenueShareFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>
+        }
+        findFirst: {
+          args: Prisma.ChatRevenueShareFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ChatRevenueShareFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>
+        }
+        findMany: {
+          args: Prisma.ChatRevenueShareFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>[]
+        }
+        create: {
+          args: Prisma.ChatRevenueShareCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>
+        }
+        createMany: {
+          args: Prisma.ChatRevenueShareCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ChatRevenueShareCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>[]
+        }
+        delete: {
+          args: Prisma.ChatRevenueShareDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>
+        }
+        update: {
+          args: Prisma.ChatRevenueShareUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>
+        }
+        deleteMany: {
+          args: Prisma.ChatRevenueShareDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ChatRevenueShareUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ChatRevenueShareUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>[]
+        }
+        upsert: {
+          args: Prisma.ChatRevenueShareUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ChatRevenueSharePayload>
+        }
+        aggregate: {
+          args: Prisma.ChatRevenueShareAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChatRevenueShare>
+        }
+        groupBy: {
+          args: Prisma.ChatRevenueShareGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatRevenueShareGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ChatRevenueShareCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatRevenueShareCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1056,6 +1131,20 @@ export const MarketListingScalarFieldEnum = {
 export type MarketListingScalarFieldEnum = (typeof MarketListingScalarFieldEnum)[keyof typeof MarketListingScalarFieldEnum]
 
 
+export const ChatRevenueShareScalarFieldEnum = {
+  id: 'id',
+  chat_id: 'chat_id',
+  user_id: 'user_id',
+  others: 'others',
+  part: 'part',
+  part_type: 'part_type',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ChatRevenueShareScalarFieldEnum = (typeof ChatRevenueShareScalarFieldEnum)[keyof typeof ChatRevenueShareScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1167,6 +1256,27 @@ export type EnumWithdrawalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'WithdrawalStatus[]'
  */
 export type ListEnumWithdrawalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WithdrawalStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'PartType'
+ */
+export type EnumPartTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartType'>
+    
+
+
+/**
+ * Reference to a field of type 'PartType[]'
+ */
+export type ListEnumPartTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PartType[]'>
     
 
 
@@ -1285,6 +1395,7 @@ export type GlobalOmitConfig = {
   tonTransaction?: Prisma.TonTransactionOmit
   withdrawalRequest?: Prisma.WithdrawalRequestOmit
   marketListing?: Prisma.MarketListingOmit
+  chatRevenueShare?: Prisma.ChatRevenueShareOmit
 }
 
 /* Types for Logging */

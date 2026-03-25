@@ -12,7 +12,7 @@ import type { router } from "./router";
 .mobile-wrapper {
     max-width: 480px;
     margin: 0 auto;
-    padding: 16px;
+    /* padding: 16px; */
 
     min-height: 100vh;
 

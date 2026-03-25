@@ -76,3 +76,8 @@ export type WithdrawalRequest = Prisma.WithdrawalRequestModel
  * 
  */
 export type MarketListing = Prisma.MarketListingModel
+/**
+ * Model ChatRevenueShare
+ * 
+ */
+export type ChatRevenueShare = Prisma.ChatRevenueShareModel

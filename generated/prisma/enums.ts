@@ -16,3 +16,11 @@ export const WithdrawalStatus = {
 } as const
 
 export type WithdrawalStatus = (typeof WithdrawalStatus)[keyof typeof WithdrawalStatus]
+
+
+export const PartType = {
+  USDT: 'USDT',
+  PART: 'PART'
+} as const
+
+export type PartType = (typeof PartType)[keyof typeof PartType]

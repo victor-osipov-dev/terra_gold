@@ -99,14 +99,14 @@ app.get('/user/:user_id/admin-chats-live', async (req, res) => {
         const updatedRoles = []
 
         for (const item of userChats) {
-            
+
             if (!item.role || (Date.now() - +item.role_updated_at >= FIVE_MINUTES)) {
                 try {
                     const member = await bot.telegram.getChatMember(
                         Number(item.chat_id),
                         Number(item.user_id)
                     )
-                    
+
                     updatedRoles.push({
                         user_id: item.user_id,
                         chat_id: item.chat.id,
@@ -161,3 +161,52 @@ app.get('/user/:user_id/admin-chats-live', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' })
     }
 })
+
+app.get("/chats/:chatId/income-parts", async (req, res) => {
+    try {
+        const chatId = BigInt(req.params.chatId);
+
+        const incomeParts = await prisma.chatRevenueShare.findMany({
+            where: {
+                chat_id: chatId,
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        username: true,
+                        first_name: true,
+                        last_name: true,
+                    },
+                },
+            },
+            orderBy: {
+                created_at: "asc",
+            },
+        });
+
+        console.log(123)
+
+        res.json(
+            incomeParts.map(item => ({
+                ...item,
+                id: item.id?.toString(),
+                chat_id: item.chat_id?.toString(),
+                user_id: item.user_id?.toString(),
+                user: item.user
+                    ? {
+                        ...item.user,
+                        id: item.user.id?.toString(),
+                    }
+                    : null,
+            }))
+        );
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            error: "Failed to fetch income parts",
+        });
+    }
+});

@@ -13,5 +13,13 @@ export const router = createRouter({
             path: "/deposit",
             component: () => import("./pages/DepositPage.vue"),
         },
+        {
+            path: "/admin-chats",
+            component: () => import("./pages/AdminChatsPage.vue"),
+        },
+        {
+            path: "/management-chat/:chatId",
+            component: () => import("./pages/ManagementChatPage.vue"),
+        },
     ],
 });

@@ -305,8 +305,8 @@ export type UserChatActivityScalarWhereWithAggregatesInput = {
 }
 
 export type UserChatActivityCreateInput = {
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -317,8 +317,8 @@ export type UserChatActivityCreateInput = {
 export type UserChatActivityUncheckedCreateInput = {
   user_id: bigint | number
   chat_id: bigint | number
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -347,8 +347,8 @@ export type UserChatActivityUncheckedUpdateInput = {
 export type UserChatActivityCreateManyInput = {
   user_id: bigint | number
   chat_id: bigint | number
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -520,8 +520,8 @@ export type NullableStringFieldUpdateOperationsInput = {
 }
 
 export type UserChatActivityCreateWithoutUserInput = {
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -530,8 +530,8 @@ export type UserChatActivityCreateWithoutUserInput = {
 
 export type UserChatActivityUncheckedCreateWithoutUserInput = {
   chat_id: bigint | number
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -577,8 +577,8 @@ export type UserChatActivityScalarWhereInput = {
 }
 
 export type UserChatActivityCreateWithoutChatInput = {
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -587,8 +587,8 @@ export type UserChatActivityCreateWithoutChatInput = {
 
 export type UserChatActivityUncheckedCreateWithoutChatInput = {
   user_id: bigint | number
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -622,8 +622,8 @@ export type UserChatActivityUpdateManyWithWhereWithoutChatInput = {
 
 export type UserChatActivityCreateManyUserInput = {
   chat_id: bigint | number
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
@@ -658,8 +658,8 @@ export type UserChatActivityUncheckedUpdateManyWithoutUserInput = {
 
 export type UserChatActivityCreateManyChatInput = {
   user_id: bigint | number
-  total_messages: number
-  messages_per_hour: number
+  total_messages?: number
+  messages_per_hour?: number
   joined_at?: Date | string
   role?: string | null
   role_updated_at?: Date | string
