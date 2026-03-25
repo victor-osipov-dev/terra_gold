@@ -25,7 +25,8 @@ const manageChat = (chat) => {
 
 const PLOT_ICONS = ['🌾', '🌽', '🥕', '🍅', '🥦', '🌻', '🍓', '🥔']
 function plotIcon(chatId) {
-    return PLOT_ICONS[Number(chatId) % PLOT_ICONS.length]
+    chatId = chatId >= 0 ? chatId : chatId * -1;
+    return PLOT_ICONS[Number(chatId) % PLOT_ICONS.length];
 }
 </script>
 
@@ -263,6 +264,9 @@ function plotIcon(chatId) {
     cursor: pointer;
     box-shadow: 0 3px 0 #3a6020;
     transition: transform .1s, box-shadow .1s, opacity .15s;
+    width: 150px;
+    margin-bottom: 0.5rem;
+    justify-content: center;
 }
 
 .refresh-btn:disabled {

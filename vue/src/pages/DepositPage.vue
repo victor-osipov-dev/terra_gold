@@ -126,10 +126,10 @@ async function deposit() {
                     <span class="summary-key">💰 Сумма</span>
                     <span class="summary-val">{{ selectedAmount }} TON</span>
                 </div>
-                <div class="summary-row">
+                <!-- <div class="summary-row">
                     <span class="summary-key">📦 В нано-TON</span>
                     <span class="summary-val mono">{{ (selectedAmount * 1e9).toLocaleString() }}</span>
-                </div>
+                </div> -->
             </div>
 
             <!-- Straw divider -->

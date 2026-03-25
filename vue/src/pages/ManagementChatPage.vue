@@ -104,7 +104,7 @@ const AVATAR_COLORS = [
 ]
 
 function avatarStyle(userId?: bigint | number | null): Record<string, string> {
-    const c = AVATAR_COLORS[Number(userId ?? 0) % AVATAR_COLORS.length]
+    let c = AVATAR_COLORS[Number(userId ?? 0) % AVATAR_COLORS.length]!
     return { background: c.bg, border: `2px solid ${c.border}`, color: c.text }
 }
 
@@ -122,7 +122,7 @@ function errorMessage(err: unknown): string {
     <div class="farm-page">
         <!-- Fence top -->
         <div class="fence-top">
-            <span v-for="i in 18" :key="i" class="fence-post" />
+            <span v-for="i in 20" :key="i" class="fence-post" />
         </div>
 
         <!-- Back button -->

@@ -381,6 +381,7 @@ if (route.query.action == "deposit") {
     margin-bottom: 2px;
 }
 .wallet-chip {
+    box-sizing: border-box;
     width: 100%;
     text-align: center;
     padding: 9px 16px;
